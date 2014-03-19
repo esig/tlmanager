@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="tslTitle" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="tslTitle" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="eu.europa.ec.markt.tlmanager.view.common.TitledPanel" name="tslTitle">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="tslTitle" noResource="true"/>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="schemeOperatorNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="tslSequenceNumberLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="schemeOperatorPostalAddressLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="schemeOperatorElectronicAddressLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="schemeNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="schemeInformationURILabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="schemeTypeCommunityRuleLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="schemeTerritoryLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="policyOrLegalNoticeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="historicalInformationPeriodLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="listIssueDateLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="closedLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="nextUpdateLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="distributionPointLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="tslIdentifierLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="schemeExtensionsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="tslIdentifier" alignment="0" max="32767" attributes="1"/>
+                      <Component id="historicalInformationPeriod" alignment="0" max="32767" attributes="1"/>
+                      <Component id="tslSequenceNumber" alignment="0" max="32767" attributes="1"/>
+                      <Component id="listIssueDate" alignment="0" max="32767" attributes="2"/>
+                      <Component id="schemeOperatorElectronicAddress" alignment="0" max="32767" attributes="0"/>
+                      <Component id="schemeOperatorPostalAddress" alignment="0" max="32767" attributes="0"/>
+                      <Component id="schemeOperatorName" alignment="0" max="32767" attributes="1"/>
+                      <Component id="schemeName" alignment="0" max="32767" attributes="0"/>
+                      <Component id="schemeInformationURI" alignment="0" max="32767" attributes="0"/>
+                      <Component id="schemeTypeCommunityRule" alignment="0" max="32767" attributes="0"/>
+                      <Component id="policyOrLegalNotice" alignment="0" max="32767" attributes="0"/>
+                      <Component id="nextUpdate" alignment="0" max="32767" attributes="3"/>
+                      <Component id="distributionPoint" alignment="0" max="32767" attributes="1"/>
+                      <Component id="tslType" alignment="0" max="32767" attributes="0"/>
+                      <Component id="schemeTerritory" alignment="0" max="32767" attributes="1"/>
+                      <Group type="102" attributes="0">
+                          <Component id="closed" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="statusDeterminationApproach" max="32767" attributes="0"/>
+                      <Component id="schemeExtensionsButton" alignment="0" max="32767" attributes="1"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="tslSequenceNumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tslSequenceNumberLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tslType" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="schemeOperatorName" min="-2" max="-2" attributes="0"/>
+                      <Component id="schemeOperatorNameLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="schemeOperatorPostalAddress" min="-2" max="-2" attributes="0"/>
+                      <Component id="schemeOperatorPostalAddressLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="schemeOperatorElectronicAddress" min="-2" max="-2" attributes="0"/>
+                      <Component id="schemeOperatorElectronicAddressLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="schemeName" min="-2" max="-2" attributes="0"/>
+                      <Component id="schemeNameLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="schemeInformationURI" min="-2" max="-2" attributes="0"/>
+                      <Component id="schemeInformationURILabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="statusDeterminationApproach" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="schemeTypeCommunityRule" min="-2" max="-2" attributes="0"/>
+                      <Component id="schemeTypeCommunityRuleLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="schemeTerritory" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="schemeTerritoryLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="policyOrLegalNotice" min="-2" max="-2" attributes="0"/>
+                      <Component id="policyOrLegalNoticeLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="historicalInformationPeriod" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="historicalInformationPeriodLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="listIssueDateLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="listIssueDate" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="closed" min="-2" max="-2" attributes="0"/>
+                      <Component id="closedLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="nextUpdateLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="nextUpdate" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="distributionPoint" min="-2" max="-2" attributes="0"/>
+                      <Component id="distributionPointLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="tslIdentifier" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tslIdentifierLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="schemeExtensionsButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="schemeExtensionsLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="tslSequenceNumberLabel">
+          <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="tslSequenceNumber"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="eu/europa/ec/markt/tlmanager/uiKeys.properties" key="TSLInformationPage.tslSequenceNumberLabel.text" replaceFormat="uiKeys.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tslSequenceNumber">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="tslSequenceNumber" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="schemeOperatorNameLabel">
+          <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="schemeOperatorName"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="eu/europa/ec/markt/tlmanager/uiKeys.properties" key="TSLInformationPage.schemeOperatorNameLabel.text" replaceFormat="uiKeys.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton" name="schemeOperatorName">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="schemeOperatorName" noResource="true"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton(MultiMode.MULTILANG_TEXT, Configuration.LanguageCodes.getEnglishLanguage(), null)"/>
+          </AuxValues>
+        </Component>
+        <Component class="eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton" name="schemeOperatorPostalAddress">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="schemeOperatorPostalAddress" noResource="true"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton(MultiMode.MULTILANG_POSTAL, Configuration.LanguageCodes.getEnglishLanguage(), null)"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="schemeOperatorPostalAddressLabel">
+          <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="schemeOperatorPostalAddress"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="eu/europa/ec/markt/tlmanager/uiKeys.properties" key="TSLInformationPage.schemeOperatorPostalAddressLabel.text" replaceFormat="uiKeys.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton" name="schemeOperatorElectronicAddress">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="schemeOperatorElectronicAddress" noResource="true"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton(MultiMode.MULTI_MULTILANGANYURI, null, null)"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="schemeOperatorElectronicAddressLabel">
+          <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="schemeOperatorElectronicAddress"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="eu/europa/ec/markt/tlmanager/uiKeys.properties" key="TSLInformationPage.schemeOperatorElectronicAddressLabel.text" replaceFormat="uiKeys.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="schemeNameLabel">
+          <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="schemeName"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="eu/europa/ec/markt/tlmanager/uiKeys.properties" key="TSLInformationPage.schemeNameLabel.text" replaceFormat="uiKeys.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton" name="schemeName">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="schemeName" noResource="true"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton(MultiMode.MULTILANG_TEXT, Configuration.LanguageCodes.getEnglishLanguage(), null)"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="schemeInformationURILabel">
+          <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="schemeInformationURI"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="eu/europa/ec/markt/tlmanager/uiKeys.properties" key="TSLInformationPage.schemeInformationURILabel.text" replaceFormat="uiKeys.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton" name="schemeInformationURI">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="schemeInformationURI" noResource="true"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton(MultiMode.MULTILANG_TEXT, Configuration.LanguageCodes.getEnglishLanguage(), null)"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="schemeTypeCommunityRuleLabel">
+          <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="schemeTypeCommunityRule"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="eu/europa/ec/markt/tlmanager/uiKeys.properties" key="TSLInformationPage.schemeTypeCommunityRuleLabel.text" replaceFormat="uiKeys.getString(&quot;{key}&quot;)"/>
+            </Property>
+            <Property name="name" type="java.lang.String" value="schemeTypeCommunityRuleLabel" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton" name="schemeTypeCommunityRule">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="schemeTypeCommunityRule" noResource="true"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton(MultiMode.MULTILANG_COMBOBOX, null, Util.addNoSelectionEntry(Configuration.getInstance().getTSL().getTslSchemeTypeCommunityRules()))"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="schemeTerritoryLabel">
+          <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="schemeTerritory"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="eu/europa/ec/markt/tlmanager/uiKeys.properties" key="TSLInformationPage.schemeTerritoryLabel.text" replaceFormat="uiKeys.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="schemeTerritory">
+          <Properties>
+            <Property name="editable" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="!Configuration.getInstance().isEuMode()" type="code"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="schemeTerritoryModel" type="code"/>
+            </Property>
+            <Property name="name" type="java.lang.String" value="schemeTerritory" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="policyOrLegalNoticeLabel">
+          <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="policyOrLegalNotice"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="eu/europa/ec/markt/tlmanager/uiKeys.properties" key="TSLInformationPage.policyOrLegalNoticeLabel.text" replaceFormat="uiKeys.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton" name="policyOrLegalNotice">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="policyOrLegalNotice" noResource="true"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton(MultiMode.MULTILANG_TEXT, Configuration.LanguageCodes.getEnglishLanguage(), null)"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="historicalInformationPeriodLabel">
+          <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="historicalInformationPeriod"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="eu/europa/ec/markt/tlmanager/uiKeys.properties" key="TSLInformationPage.historicalInformationPeriodLabel.text" replaceFormat="uiKeys.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="historicalInformationPeriod">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="historicalInformationPeriod" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="listIssueDateLabel">
+          <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="listIssueDate"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="eu/europa/ec/markt/tlmanager/uiKeys.properties" key="TSLInformationPage.listIssueDateLabel.text" replaceFormat="uiKeys.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="nextUpdateLabel">
+          <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="nextUpdate"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="eu/europa/ec/markt/tlmanager/uiKeys.properties" key="TSLInformationPage.nextUpdateLabel.text" replaceFormat="uiKeys.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="closedLabel">
+          <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="closed"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="eu/europa/ec/markt/tlmanager/uiKeys.properties" key="TSLInformationPage.closedLabel.text" replaceFormat="uiKeys.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="closed">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="closed" noResource="true"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="closedActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="distributionPointLabel">
+          <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="distributionPoint"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="eu/europa/ec/markt/tlmanager/uiKeys.properties" key="TSLInformationPage.distributionPointLabel.text" replaceFormat="uiKeys.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton" name="distributionPoint">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="distributionPoint" noResource="true"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton(MultiMode.MULTI_ANYURI, Configuration.LanguageCodes.getEnglishLanguage(), null)"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="tslIdentifierLabel">
+          <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="tslIdentifier"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="eu/europa/ec/markt/tlmanager/uiKeys.properties" key="TSLInformationPage.tslIdentifierLabel.text" replaceFormat="uiKeys.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tslIdentifier">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="tslIdentifier" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="eu.europa.ec.markt.tlmanager.view.common.DateTimePicker" name="listIssueDate">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="listIssueDate" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="eu.europa.ec.markt.tlmanager.view.common.DateTimePicker" name="nextUpdate">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="nextUpdate" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="TSL type"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="tslType">
+          <Properties>
+            <Property name="editable" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="!Configuration.getInstance().isEuMode()" type="code"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="tslTypeModel" type="code"/>
+            </Property>
+            <Property name="name" type="java.lang.String" value="tslType" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="statusDeterminationApproach">
+          <Properties>
+            <Property name="editable" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="!Configuration.getInstance().isEuMode()" type="code"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="statusDeterminationApproachModel" type="code"/>
+            </Property>
+            <Property name="name" type="java.lang.String" value="statusDeterminationApproach" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Status Determination Approach"/>
+          </Properties>
+        </Component>
+        <Component class="eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton" name="schemeExtensionsButton">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton(MultiMode.MULTI_TSPINEX, null, null)"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="schemeExtensionsLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Scheme Extensions"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

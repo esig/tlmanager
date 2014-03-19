@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="serviceTitle" max="32767" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="serviceTitle" max="32767" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="eu.europa.ec.markt.tlmanager.view.common.TitledPanel" name="serviceTitle">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="serviceTitle" noResource="true"/>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="serviceTypeIdentifierLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="serviceNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="digitalIdLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="serviceCurrentStatusLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="currentStatusStartingDateLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="schemeServiceInformationLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="serviceSupplyPointsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="serviceDefinitionURILabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="serviceTypeIdentifier" alignment="0" pref="558" max="32767" attributes="1"/>
+                      <Component id="serviceCurrentStatus" alignment="0" pref="558" max="32767" attributes="1"/>
+                      <Component id="currentStatusStartingDate" alignment="0" pref="558" max="32767" attributes="2"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="serviceName" alignment="0" max="32767" attributes="0"/>
+                              <Component id="schemeServiceInformation" max="32767" attributes="1"/>
+                              <Component id="serviceSupplyPoints" max="32767" attributes="1"/>
+                              <Component id="serviceDefinitionURI" max="32767" attributes="1"/>
+                              <Component id="serviceDigitalIdentityButton" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="serviceTypeIdentifierLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="serviceTypeIdentifier" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="serviceNameLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="serviceName" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="digitalIdLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="serviceDigitalIdentityButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="serviceCurrentStatus" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="serviceCurrentStatusLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="currentStatusStartingDateLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="currentStatusStartingDate" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="schemeServiceInformationLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="schemeServiceInformation" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="serviceSupplyPoints" min="-2" max="-2" attributes="0"/>
+                      <Component id="serviceSupplyPointsLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="serviceDefinitionURI" min="-2" max="-2" attributes="0"/>
+                      <Component id="serviceDefinitionURILabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="98" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="serviceTypeIdentifierLabel">
+          <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="serviceTypeIdentifier"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="eu/europa/ec/markt/tlmanager/uiKeys.properties" key="ServiceCurrentStatusInformationPage.serviceTypeIdentifierLabel.text" replaceFormat="uiKeys.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="serviceTypeIdentifier">
+          <Properties>
+            <Property name="editable" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="!Configuration.getInstance().isEuMode()" type="code"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="serviceTypeIdentifierModel" type="code"/>
+            </Property>
+            <Property name="name" type="java.lang.String" value="serviceTypeIdentifier" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="serviceNameLabel">
+          <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="serviceName"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="eu/europa/ec/markt/tlmanager/uiKeys.properties" key="ServiceCurrentStatusInformationPage.serviceNameLabel.text" replaceFormat="uiKeys.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="digitalIdLabel">
+          <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="serviceDigitalIdentityButton"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="eu/europa/ec/markt/tlmanager/uiKeys.properties" key="ServiceCurrentStatusInformationPage.digitalIdLabel.text" replaceFormat="uiKeys.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="serviceCurrentStatus">
+          <Properties>
+            <Property name="editable" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="!Configuration.getInstance().isEuMode()" type="code"/>
+            </Property>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="serviceCurrentStatusModel" type="code"/>
+            </Property>
+            <Property name="name" type="java.lang.String" value="serviceCurrentStatus" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="serviceCurrentStatusLabel">
+          <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="serviceCurrentStatus"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="eu/europa/ec/markt/tlmanager/uiKeys.properties" key="ServiceCurrentStatusInformationPage.serviceCurrentStatusLabel.text" replaceFormat="uiKeys.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="currentStatusStartingDateLabel">
+          <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="currentStatusStartingDate"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="eu/europa/ec/markt/tlmanager/uiKeys.properties" key="ServiceCurrentStatusInformationPage.currentStatusStartingDateLabel.text" replaceFormat="uiKeys.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton" name="schemeServiceInformation">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="schemeServiceInformation" noResource="true"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton(MultiMode.MULTILANG_TEXT, Configuration.LanguageCodes.getEnglishLanguage(), null)"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="schemeServiceInformationLabel">
+          <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="schemeServiceInformation"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="eu/europa/ec/markt/tlmanager/uiKeys.properties" key="ServiceCurrentStatusInformationPage.schemeServiceInformationLabel.text" replaceFormat="uiKeys.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="serviceSupplyPointsLabel">
+          <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="serviceSupplyPoints"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="eu/europa/ec/markt/tlmanager/uiKeys.properties" key="ServiceCurrentStatusInformationPage.serviceSupplyPointsLabel.text" replaceFormat="uiKeys.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton" name="serviceDefinitionURI">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="serviceDefinitionURI" noResource="true"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton(MultiMode.MULTILANG_TEXT, Configuration.LanguageCodes.getEnglishLanguage(), null)"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="serviceDefinitionURILabel">
+          <Properties>
+            <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="serviceDefinitionURI"/>
+            </Property>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="eu/europa/ec/markt/tlmanager/uiKeys.properties" key="ServiceCurrentStatusInformationPage.serviceDefinitionURILabel.text" replaceFormat="uiKeys.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="eu.europa.ec.markt.tlmanager.view.common.DateTimePicker" name="currentStatusStartingDate">
+        </Component>
+        <Component class="eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton" name="serviceName">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="serviceName" noResource="true"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton(MultiMode.MULTILANG_TEXT, Configuration.LanguageCodes.getEnglishLanguage(), null)"/>
+          </AuxValues>
+        </Component>
+        <Component class="eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton" name="serviceSupplyPoints">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="serviceDefinitionURI" noResource="true"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton(MultiMode.MULTI_ANYURI, Configuration.LanguageCodes.getEnglishLanguage(), null)"/>
+          </AuxValues>
+        </Component>
+        <Component class="eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton" name="serviceDigitalIdentityButton">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="serviceName" noResource="true"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton(MultiMode.MULTI_DIGITALID, null, null)"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>eu.europa.ec.joinup.sd-dss</groupId>
+        <artifactId>tlmanager</artifactId>
+        <version>4.1.0-SNAPSHOT</version>
+    </parent>
+
+    <name>TLManager DSS Package</name>
+    <description>TLManager Application of Project DSS</description>
+    <artifactId>tlmanager-package</artifactId>
+    <packaging>jar</packaging>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <excludes>*.xml,*.xsd,*.dtd,*.cat,custom-content-types.properties,META-INF/BCKEY.*,102231v030102XMLSchemas/**,102853/**,119612v010101XMLSchemas/**,trax/**,schema/**,junit/**,java_cup/**,antlr/**,com/jhlabs/**,org/hamcrest/**,org/junit/**,org/apache/bcel/**,org/apache/directory/**,org/apache/fontbox/**,org/apache/html/**,org/apache/jempbox/**,org/apache/pdfbox/**,org/apache/mina/**,org/apache/wml/**,org/apache/http/**,META-INF/upgrade/**,META-INF/upgrade/maven/**,META-INF/upgrade/namedservices/**,org/apache/commons/collections/**,org/apache/commons/pool/**,org/apache/commons/lang/**,**/pades/**,**/cades/**,**/asic/**,**/pdf/**,**/engine/**</excludes>
+                            <includes>**/*</includes>
+                            <outputDirectory>
+                                ${project.build.directory}/classes
+                            </outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>
+                                eu.europa.ec.markt.tlmanager.TLManager
+                            </mainClass>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jarsigner-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!--<type>JKS</type>-->
+                    <keystore>src/sign.jks</keystore>
+                    <alias>dss</alias>
+                    <storepass>password</storepass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>eu.europa.ec.joinup.sd-dss</groupId>
+            <artifactId>tlmanager-app</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
