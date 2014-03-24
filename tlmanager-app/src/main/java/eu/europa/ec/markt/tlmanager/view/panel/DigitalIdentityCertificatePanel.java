@@ -24,7 +24,6 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.math.BigInteger;
-import java.security.Security;
 import java.security.cert.CertificateParsingException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
@@ -34,7 +33,6 @@ import java.util.ResourceBundle;
 import javax.security.auth.x500.X500Principal;
 import javax.swing.*;
 
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -91,12 +89,9 @@ public class DigitalIdentityCertificatePanel extends JPanel implements ContentDi
     }
 
     private void loadCertificate(File file) {
-        FileInputStream inputStream = null;
-
-        Security.addProvider(new BouncyCastleProvider());
-
         try {
-            inputStream = new FileInputStream(file);
+
+            FileInputStream inputStream = new FileInputStream(file);
 
             X509Certificate cert = DSSUtils.loadCertificate(inputStream);
             digitalIdentityModel.setCertificate(cert);
@@ -208,26 +203,26 @@ public class DigitalIdentityCertificatePanel extends JPanel implements ContentDi
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        selectCertificate = new javax.swing.JButton();
+        selectCertificate = new JButton();
         certificateTitle = new eu.europa.ec.markt.tlmanager.view.common.TitledPanel();
-        issuerScrollPane = new javax.swing.JScrollPane();
-        issuer = new javax.swing.JTextArea();
-        issuerLabel = new javax.swing.JLabel();
-        subjectScrollPane = new javax.swing.JScrollPane();
-        subject = new javax.swing.JTextArea();
-        subjectLabel = new javax.swing.JLabel();
-        keyUsagesLabel = new javax.swing.JLabel();
-        serialLabel = new javax.swing.JLabel();
-        serial = new javax.swing.JTextField();
-        keyUsagesScrollPane = new javax.swing.JScrollPane();
-        keyUsages = new javax.swing.JList();
+        issuerScrollPane = new JScrollPane();
+        issuer = new JTextArea();
+        issuerLabel = new JLabel();
+        subjectScrollPane = new JScrollPane();
+        subject = new JTextArea();
+        subjectLabel = new JLabel();
+        keyUsagesLabel = new JLabel();
+        serialLabel = new JLabel();
+        serial = new JTextField();
+        keyUsagesScrollPane = new JScrollPane();
+        keyUsages = new JList();
 
         setName("DigitalIdentityPanel"); // NOI18N
 
         selectCertificate.setText(uiKeys.getString("DigitalIdentityPanel.select")); // NOI18N
         selectCertificate.setName("selectCertificate"); // NOI18N
         selectCertificate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(ActionEvent evt) {
                 selectCertificateActionPerformed(evt);
             }
         });
@@ -259,64 +254,64 @@ public class DigitalIdentityCertificatePanel extends JPanel implements ContentDi
         keyUsages.setModel(keyUsageModel);
         keyUsagesScrollPane.setViewportView(keyUsages);
 
-        javax.swing.GroupLayout certificateTitleLayout = new javax.swing.GroupLayout(certificateTitle);
+        GroupLayout certificateTitleLayout = new GroupLayout(certificateTitle);
         certificateTitle.setLayout(certificateTitleLayout);
         certificateTitleLayout.setHorizontalGroup(
-            certificateTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            certificateTitleLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(certificateTitleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(certificateTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(certificateTitleLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(keyUsagesLabel)
                     .addComponent(serialLabel)
                     .addComponent(issuerLabel)
                     .addComponent(subjectLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(certificateTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(issuerScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
-                    .addComponent(keyUsagesScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
-                    .addComponent(serial, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
-                    .addComponent(subjectScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(certificateTitleLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(issuerScrollPane, GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                    .addComponent(keyUsagesScrollPane, GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                    .addComponent(serial, GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                    .addComponent(subjectScrollPane, GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))
                 .addContainerGap())
         );
         certificateTitleLayout.setVerticalGroup(
-            certificateTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            certificateTitleLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(certificateTitleLayout.createSequentialGroup()
-                .addGroup(certificateTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(certificateTitleLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(subjectLabel)
-                    .addComponent(subjectScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(certificateTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(subjectScrollPane, GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(certificateTitleLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(issuerLabel)
-                    .addComponent(issuerScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(certificateTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(serial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(issuerScrollPane, GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(certificateTitleLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(serial, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(serialLabel))
                 .addGap(18, 18, 18)
-                .addGroup(certificateTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(certificateTitleLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(keyUsagesLabel)
-                    .addComponent(keyUsagesScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE))
+                    .addComponent(keyUsagesScrollPane, GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                    .addGroup(GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(selectCertificate)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(certificateTitle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(certificateTitle, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(certificateTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(certificateTitle, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(selectCertificate)
                 .addContainerGap())
@@ -340,18 +335,18 @@ public class DigitalIdentityCertificatePanel extends JPanel implements ContentDi
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private eu.europa.ec.markt.tlmanager.view.common.TitledPanel certificateTitle;
-    private javax.swing.JTextArea issuer;
-    private javax.swing.JLabel issuerLabel;
-    private javax.swing.JScrollPane issuerScrollPane;
-    private javax.swing.JList keyUsages;
-    private javax.swing.JLabel keyUsagesLabel;
-    private javax.swing.JScrollPane keyUsagesScrollPane;
-    private javax.swing.JButton selectCertificate;
-    private javax.swing.JTextField serial;
-    private javax.swing.JLabel serialLabel;
-    private javax.swing.JTextArea subject;
-    private javax.swing.JLabel subjectLabel;
-    private javax.swing.JScrollPane subjectScrollPane;
+    private JTextArea issuer;
+    private JLabel issuerLabel;
+    private JScrollPane issuerScrollPane;
+    private JList keyUsages;
+    private JLabel keyUsagesLabel;
+    private JScrollPane keyUsagesScrollPane;
+    private JButton selectCertificate;
+    private JTextField serial;
+    private JLabel serialLabel;
+    private JTextArea subject;
+    private JLabel subjectLabel;
+    private JScrollPane subjectScrollPane;
     // End of variables declaration//GEN-END:variables
     /*
      * (non-Javadoc)

@@ -20,13 +20,16 @@
 
 package eu.europa.ec.markt.tlmanager;
 
+import java.security.Security;
+
 import javax.swing.*;
+
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import eu.europa.ec.markt.tlmanager.view.MainFrame;
 
 /**
- * Entrypoint of TLManager. Instantiates a <code>MainFrame</code>.
- * 
+ * Entry point of TLManager. Instantiates a {@code MainFrame}.
  *
  * @version $Revision$ - $Date$
  */
@@ -35,10 +38,13 @@ public class TLManager {
 
     /**
      * The main method.
-     * 
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
+        Security.addProvider(new BouncyCastleProvider());
+
         initSwingPreferences();
 
         MainFrame mf = new MainFrame();

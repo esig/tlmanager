@@ -23,16 +23,11 @@ package eu.europa.ec.markt.tlmanager.view.panel;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileInputStream;
-import java.security.Security;
 import java.security.cert.X509Certificate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.swing.*;
 
-import org.apache.commons.lang.StringUtils;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,7 +36,6 @@ import eu.europa.ec.markt.tlmanager.core.Configuration;
 import eu.europa.ec.markt.tlmanager.util.Util;
 import eu.europa.ec.markt.tlmanager.view.certificate.DigitalIdentityModel;
 import eu.europa.ec.markt.tlmanager.view.common.ContentDialogCloser;
-import eu.europa.ec.markt.tlmanager.view.multivalue.ContentWatcher;
 
 /**
  * A panel which allows uploading a certificate and displays its data.
@@ -54,17 +48,14 @@ public class DigitalIdentitySKIPanel extends JPanel implements ContentDialogClos
     private static final Logger LOG = LoggerFactory.getLogger(DigitalIdentityCertificatePanel.class);
     private static final ResourceBundle uiKeys = ResourceBundle.getBundle("eu/europa/ec/markt/tlmanager/uiKeysComponents", Configuration.getInstance().getLocale());
 
-    private List<ContentWatcher> contentWatcherListener;
     private JFileChooser fileChooser;
     private DigitalIdentityModel digitalIdentityModel;
-
 
     /**
      * The default constructor for DigitalIdentityPanel.
      */
     public DigitalIdentitySKIPanel() {
         this.fileChooser = new JFileChooser();
-        contentWatcherListener = new ArrayList<ContentWatcher>();
 
         initComponents();
 
@@ -75,22 +66,16 @@ public class DigitalIdentitySKIPanel extends JPanel implements ContentDialogClos
      */
     public DigitalIdentitySKIPanel(JFileChooser fileChooser) {
         this.fileChooser = fileChooser;
-        contentWatcherListener = new ArrayList<ContentWatcher>();
 
         initComponents();
 
     }
 
     private void loadCertificate(File file) {
-        FileInputStream inputStream = null;
-
-        Security.addProvider(new BouncyCastleProvider());
-
         try {
-            inputStream = new FileInputStream(file);
 
-            X509Certificate certificate = DSSUtils.loadCertificate(inputStream);
-
+            final FileInputStream inputStream = new FileInputStream(file);
+            final X509Certificate certificate = DSSUtils.loadCertificate(inputStream);
             if (certificate != null) {
                 byte[] skiValue = DSSUtils.getSki(certificate);
                 digitalIdentityModel.setSKI(skiValue);
@@ -98,7 +83,6 @@ public class DigitalIdentitySKIPanel extends JPanel implements ContentDialogClos
                 digitalIdentityModel.setSKI(null);
             }
             refresh();
-
         } catch (Exception ex) {
             String message = uiKeys.getString("DigitalIdentityPanel.error.message");
             JOptionPane.showMessageDialog(this, message, uiKeys.getString("DigitalIdentityPanel.error.title"), JOptionPane.INFORMATION_MESSAGE);
@@ -129,17 +113,17 @@ public class DigitalIdentitySKIPanel extends JPanel implements ContentDialogClos
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        selectCertificate = new javax.swing.JButton();
-        subjectScrollPane = new javax.swing.JScrollPane();
-        ski = new javax.swing.JTextArea();
-        skiLabel = new javax.swing.JLabel();
+        selectCertificate = new JButton();
+        subjectScrollPane = new JScrollPane();
+        ski = new JTextArea();
+        skiLabel = new JLabel();
 
         setName("DigitalIdentityPanel"); // NOI18N
 
         selectCertificate.setText(uiKeys.getString("DigitalIdentityPanel.loadFromCertificate")); // NOI18N
         selectCertificate.setName("selectCertificate"); // NOI18N
         selectCertificate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(ActionEvent evt) {
                 selectCertificateActionPerformed(evt);
             }
         });
@@ -152,29 +136,20 @@ public class DigitalIdentitySKIPanel extends JPanel implements ContentDialogClos
 
         skiLabel.setText(uiKeys.getString("DigitalIdentityPanel.ski")); // NOI18N
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(selectCertificate)
-                        .addGap(0, 357, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup().addComponent(skiLabel).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                          .addComponent(subjectScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)))
-                .addContainerGap())
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addContainerGap().addGroup(
+                    layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                          .addGroup(layout.createSequentialGroup().addComponent(selectCertificate).addGap(0, 357, Short.MAX_VALUE)).addGroup(
+                          layout.createSequentialGroup().addComponent(skiLabel).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(subjectScrollPane, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                    )
+              ).addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(skiLabel)
-                      .addComponent(subjectScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(selectCertificate)
-                .addContainerGap())
+        layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addContainerGap().addGroup(
+                    layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(skiLabel)
+                          .addComponent(subjectScrollPane, GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+              ).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE).addComponent(selectCertificate).addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -194,10 +169,10 @@ public class DigitalIdentitySKIPanel extends JPanel implements ContentDialogClos
     }// GEN-LAST:event_closeButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton selectCertificate;
-    private javax.swing.JTextArea ski;
-    private javax.swing.JLabel skiLabel;
-    private javax.swing.JScrollPane subjectScrollPane;
+    private JButton selectCertificate;
+    private JTextArea ski;
+    private JLabel skiLabel;
+    private JScrollPane subjectScrollPane;
     // End of variables declaration//GEN-END:variables
     /*
      * (non-Javadoc)
@@ -238,11 +213,10 @@ public class DigitalIdentitySKIPanel extends JPanel implements ContentDialogClos
     public byte[] retrieveContentInformation() {
         byte[] info = null;
         final String skiText = ski.getText();
-        if (StringUtils.isNotBlank(skiText)) {
+        if (DSSUtils.isNotBlank(skiText)) {
             info = DSSUtils.base64Decode(skiText);
         }
         return info;
     }
-
 
 }

@@ -21,6 +21,7 @@
         <beansbinding.version>1.2.1</beansbinding.version>
         <mockito.version>1.9.5</mockito.version>
         <junit.version>4.11</junit.version>
+        <fest.version>1.2.1</fest.version>
     </properties>
     <build>
         <plugins>
@@ -178,16 +179,26 @@
             <version>2.1.13</version>
         </dependency>
 
-        <!--<dependency>-->
-        <!--<groupId>junit</groupId>-->
-        <!--<artifactId>junit</artifactId>-->
-        <!--<version>${junit.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.mockito</groupId>-->
-        <!--<artifactId>mockito-all</artifactId>-->
-        <!--<version>${mockito.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.easytesting</groupId>
+            <artifactId>fest-swing-junit</artifactId>
+            <version>${fest.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>${mockito.version}</version>
+        </dependency>
+
     </dependencies>
     <repositories>
         <repository>

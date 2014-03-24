@@ -23,17 +23,11 @@ package eu.europa.ec.markt.tlmanager.view.panel;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileInputStream;
-import java.security.Security;
 import java.security.cert.X509Certificate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
-import javax.security.auth.x500.X500Principal;
 import javax.swing.*;
 
-import org.apache.commons.lang.StringUtils;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +36,6 @@ import eu.europa.ec.markt.tlmanager.core.Configuration;
 import eu.europa.ec.markt.tlmanager.util.Util;
 import eu.europa.ec.markt.tlmanager.view.certificate.DigitalIdentityModel;
 import eu.europa.ec.markt.tlmanager.view.common.ContentDialogCloser;
-import eu.europa.ec.markt.tlmanager.view.multivalue.ContentWatcher;
 
 /**
  * A panel which allows uploading a certificate and displays its data.
@@ -55,7 +48,6 @@ public class DigitalIdentitySubjectNamePanel extends JPanel implements ContentDi
     private static final Logger LOG = LoggerFactory.getLogger(DigitalIdentityCertificatePanel.class);
     private static final ResourceBundle uiKeys = ResourceBundle.getBundle("eu/europa/ec/markt/tlmanager/uiKeysComponents", Configuration.getInstance().getLocale());
 
-    private List<ContentWatcher> contentWatcherListener;
     private JFileChooser fileChooser;
     private DigitalIdentityModel digitalIdentityModel;
 
@@ -64,7 +56,6 @@ public class DigitalIdentitySubjectNamePanel extends JPanel implements ContentDi
      */
     public DigitalIdentitySubjectNamePanel() {
         this.fileChooser = new JFileChooser();
-        contentWatcherListener = new ArrayList<ContentWatcher>();
 
         initComponents();
 
@@ -75,26 +66,20 @@ public class DigitalIdentitySubjectNamePanel extends JPanel implements ContentDi
      */
     public DigitalIdentitySubjectNamePanel(JFileChooser fileChooser) {
         this.fileChooser = fileChooser;
-        contentWatcherListener = new ArrayList<ContentWatcher>();
 
         initComponents();
 
     }
 
     private void loadCertificate(File file) {
-        FileInputStream inputStream = null;
-
-        Security.addProvider(new BouncyCastleProvider());
 
         try {
-            inputStream = new FileInputStream(file);
 
-            X509Certificate certificate = DSSUtils.loadCertificate(inputStream);
+            final FileInputStream inputStream = new FileInputStream(file);
+            final X509Certificate certificate = DSSUtils.loadCertificate(inputStream);
 
-            final X500Principal subjectX500Principal = certificate.getSubjectX500Principal();
-            if (subjectX500Principal != null) {
-                final String subjectX500PrincipalName = subjectX500Principal.getName(X500Principal.RFC2253);
-                // System.out.println(">>> RFC2253: " + subjectX500Principal);
+            final String subjectX500PrincipalName = DSSUtils.getSubjectX500PrincipalName(certificate);
+            if (DSSUtils.isNotBlank(subjectX500PrincipalName)) {
                 digitalIdentityModel.setSubjectName(subjectX500PrincipalName);
                 refresh();
             } else {
@@ -132,17 +117,17 @@ public class DigitalIdentitySubjectNamePanel extends JPanel implements ContentDi
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        selectCertificate = new javax.swing.JButton();
-        subjectScrollPane = new javax.swing.JScrollPane();
-        subject = new javax.swing.JTextArea();
-        subjectLabel = new javax.swing.JLabel();
+        selectCertificate = new JButton();
+        subjectScrollPane = new JScrollPane();
+        subject = new JTextArea();
+        subjectLabel = new JLabel();
 
         setName("DigitalIdentityPanel"); // NOI18N
 
         selectCertificate.setText(uiKeys.getString("DigitalIdentityPanel.loadFromCertificate")); // NOI18N
         selectCertificate.setName("selectCertificate"); // NOI18N
         selectCertificate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(ActionEvent evt) {
                 selectCertificateActionPerformed(evt);
             }
         });
@@ -155,29 +140,20 @@ public class DigitalIdentitySubjectNamePanel extends JPanel implements ContentDi
 
         subjectLabel.setText(uiKeys.getString("DigitalIdentityPanel.subject")); // NOI18N
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(selectCertificate)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup().addComponent(subjectLabel).addGap(42, 42, 42)
-                          .addComponent(subjectScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)))
-                .addContainerGap())
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addContainerGap().addGroup(
+                    layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                          .addGroup(layout.createSequentialGroup().addComponent(selectCertificate).addGap(0, 0, Short.MAX_VALUE)).addGroup(
+                          layout.createSequentialGroup().addComponent(subjectLabel).addGap(42, 42, 42)
+                                .addComponent(subjectScrollPane, GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+                    )
+              ).addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(subjectLabel)
-                      .addComponent(subjectScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addComponent(selectCertificate)
-                .addContainerGap())
+        layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addContainerGap().addGroup(
+                    layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(subjectLabel)
+                          .addComponent(subjectScrollPane, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+              ).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE).addComponent(selectCertificate).addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -197,10 +173,10 @@ public class DigitalIdentitySubjectNamePanel extends JPanel implements ContentDi
     }// GEN-LAST:event_closeButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton selectCertificate;
-    private javax.swing.JTextArea subject;
-    private javax.swing.JLabel subjectLabel;
-    private javax.swing.JScrollPane subjectScrollPane;
+    private JButton selectCertificate;
+    private JTextArea subject;
+    private JLabel subjectLabel;
+    private JScrollPane subjectScrollPane;
     // End of variables declaration//GEN-END:variables
     /*
      * (non-Javadoc)
@@ -241,9 +217,10 @@ public class DigitalIdentitySubjectNamePanel extends JPanel implements ContentDi
     public String retrieveContentInformation() {
         String info = null;
         final String subjectText = subject.getText();
-        if (StringUtils.isNotBlank(subjectText)) {
+        if (DSSUtils.isNotBlank(subjectText)) {
             info = subjectText;
-        } return info;
+        }
+        return info;
     }
 
 }
