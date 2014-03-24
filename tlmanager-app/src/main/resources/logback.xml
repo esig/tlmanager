@@ -1,0 +1,36 @@
+<configuration>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <encoder>
+            <pattern>%-5level %F:%L - %msg%n</pattern>
+            <!--<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %F:%L - %msg%n</pattern>-->
+        </encoder>
+    </appender>
+
+    <appender name="debug" class="ch.qos.logback.core.FileAppender">
+        <file>/dss-debug.log</file>
+        <!-- rewrite file each time -->
+        <append>false</append>
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>%-5level %logger{35}:%L - %msg%n</pattern>
+            <!--<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %F:%L - %msg%n</pattern>-->
+        </encoder>
+    </appender>
+
+    <!--<logger name="eu.europa" level="DEBUG">-->
+    <!--<appender-ref ref="STDOUT"/>-->
+    <!--</logger>-->
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+        <!--<appender-ref ref="debug"/>-->
+    </root>
+
+</configuration>
