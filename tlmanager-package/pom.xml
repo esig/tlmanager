@@ -31,7 +31,7 @@
                             <goal>unpack-dependencies</goal>
                         </goals>
                         <configuration>
-                            <excludes>*.xml,*.xsd,*.dtd,*.cat,custom-content-types.properties,META-INF/BCKEY.*,102231v030102XMLSchemas/**,102853/**,119612v010101XMLSchemas/**,trax/**,schema/**,junit/**,java_cup/**,antlr/**,com/jhlabs/**,org/hamcrest/**,org/junit/**,org/apache/bcel/**,org/apache/directory/**,org/apache/fontbox/**,org/apache/html/**,org/apache/jempbox/**,org/apache/pdfbox/**,org/apache/mina/**,org/apache/wml/**,org/apache/http/**,META-INF/upgrade/**,META-INF/upgrade/maven/**,META-INF/upgrade/namedservices/**,org/apache/commons/collections/**,org/apache/commons/pool/**,org/apache/commons/lang/**,**/pades/**,**/cades/**,**/asic/**,**/pdf/**,**/engine/**</excludes>
+                            <excludes>*.xml,*.xsd,*.dtd,*.cat,custo-content-types.properties,META-INF/BCKEY.*,102231v030102XMLSchemas/**,102853/**,119612v010101XMLSchemas/**,trax/**,schema/**,junit/**,java_cup/**,antlr/**,com/jhlabs/**,org/hamcrest/**,org/junit/**,org/apache/bcel/**,org/apache/directory/**,org/apache/fontbox/**,org/apache/html/**,org/apache/jempbox/**,org/apache/pdfbox/**,org/apache/mina/**,org/apache/wml/**,org/apache/http/**,META-INF/upgrade/**,META-INF/upgrade/maven/**,META-INF/upgrade/namedservices/**,org/apache/commons/collections/**,org/apache/commons/pool/**,org/apache/commons/codec/**,org/apache/commons/lang/**,**/pades/**,**/cades/**,**/asic/**,**/pdf/**,**/engine/**,org/mockito/**,org/fest/**</excludes>
                             <includes>**/*</includes>
                             <outputDirectory>
                                 ${project.build.directory}/classes
