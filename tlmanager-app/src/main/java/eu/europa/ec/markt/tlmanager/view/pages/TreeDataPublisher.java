@@ -29,6 +29,8 @@ import java.util.ResourceBundle;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 
+import eu.europa.ec.markt.tlmanager.view.certificate.DigitalIdentityModel;
+import eu.europa.ec.markt.tsl.jaxb.tsl.DigitalIdentityType;
 import org.jdesktop.swingx.JXDatePicker;
 
 import eu.europa.ec.markt.dss.DSSUtils;
@@ -165,6 +167,7 @@ public abstract class TreeDataPublisher extends JPanel implements MandatoryLabel
             }
             if (label.getLabelFor().equals(component)) {
                 boolean empty = false;
+                boolean noCertificate = true;
                 if (component instanceof JTextField) {
                     JTextField tf = (JTextField) component;
                     if (tf.getText().isEmpty()) {
@@ -199,12 +202,24 @@ public abstract class TreeDataPublisher extends JPanel implements MandatoryLabel
                     if (button.getMultivaluePanel().getMultivalueModel().isEmpty()) {
                         empty = true;
                     }
+                    for(Object value : button.getMultivaluePanel().getMultivalueModel().getKeys()){
+                        Object dIvalue = button.getMultivaluePanel().getMultivalueModel().getValue(value.toString());
+                        if(dIvalue instanceof DigitalIdentityModel){
+                            DigitalIdentityModel dit = (DigitalIdentityModel) dIvalue;
+                            if(!dit.isHistoric()) {
+                                noCertificate =(dit.getCertificate() == null);
+                            }else{
+                                //Certificate not mandatory for Historical Panel
+                                noCertificate = false;
+                            }
+                        }
+                    }
                 } else if (component instanceof CertificateProperty) {
                     CertificateProperty certificateProperty = (CertificateProperty) component;
                     empty = certificateProperty.isEmpty();
                 }
 
-                if (failure || empty) {
+                if (noCertificate || failure || empty) {
                     label.setForeground(Configuration.MANDATORY_COLOR);
                 } else {
                     label.setForeground(Configuration.NORMAL_COLOR);

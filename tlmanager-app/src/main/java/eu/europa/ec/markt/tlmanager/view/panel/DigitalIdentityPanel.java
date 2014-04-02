@@ -7,6 +7,7 @@
 package eu.europa.ec.markt.tlmanager.view.panel;
 
 import eu.europa.ec.markt.tlmanager.view.certificate.DigitalIdentityModel;
+import java.security.cert.X509Certificate;
 
 /**
  *
@@ -15,11 +16,19 @@ import eu.europa.ec.markt.tlmanager.view.certificate.DigitalIdentityModel;
 public class DigitalIdentityPanel extends javax.swing.JPanel {
 
     public DigitalIdentityModel digitalIdentityModel;
+    private boolean hasCertificat = false;
+    private X509Certificate certificate;
+    private boolean isHistoric = false;
+
+    public X509Certificate getCertificate() {
+        return certificate;
+    }
 
     /**
      * Creates new form DigitalIdentityPanel
      */
     public DigitalIdentityPanel() {
+        this.certificate = null;
         digitalIdentityModel = new DigitalIdentityModel();
         initComponents();
     }
@@ -93,9 +102,13 @@ public class DigitalIdentityPanel extends javax.swing.JPanel {
             if ("Certificate".equals(selectedItem)) {
                 showCertificate();
             } else if ("Subject Name".equals(selectedItem)) {
-                showSubjectName();
+                if(hasCertificat || isHistoric) {
+                    showSubjectName();
+                }
             } else if ("Subject Key Identifier".equals(selectedItem)) {
-                showSki();
+                if(hasCertificat || isHistoric) {
+                    showSki();
+                }
             }
         } else {
             digitalIdentityModel.setCertificate(null);
@@ -173,6 +186,7 @@ public class DigitalIdentityPanel extends javax.swing.JPanel {
         digitalIdentitySubjectNamePanel.setDigitalIdentityModel(null);
 
         digitalIdentitySKIPanel.setVisible(true);
+        digitalIdentitySKIPanel.setCertificate(getCertificate());
         digitalIdentitySKIPanel.setDigitalIdentityModel(digitalIdentityModel);
     }
 
@@ -181,8 +195,9 @@ public class DigitalIdentityPanel extends javax.swing.JPanel {
         digitalIdentityCertificatePanel.setDigitalIdentityModel(null);
 
         digitalIdentitySubjectNamePanel.setVisible(true);
+        digitalIdentitySubjectNamePanel.setCertificate(getCertificate());
         digitalIdentitySubjectNamePanel.setDigitalIdentityModel(digitalIdentityModel);
-
+        
 
         digitalIdentitySKIPanel.setVisible(false);
         digitalIdentitySKIPanel.setDigitalIdentityModel(null);
@@ -202,5 +217,26 @@ public class DigitalIdentityPanel extends javax.swing.JPanel {
     public void clearOnExit() {
         setDigitalIdentityModel(new DigitalIdentityModel());
         updateCurrentValues(digitalIdentityModel);
+    }
+
+    public void setHasCertificate(boolean b) {
+        hasCertificat = b;
+        
+        int index = digitalIdentityComboBox.getSelectedIndex();
+        digitalIdentityComboBox.removeItem("Subject Name");
+        digitalIdentityComboBox.removeItem("Subject Key Identifier");
+        if(hasCertificat || isHistoric){
+            digitalIdentityComboBox.addItem("Subject Name");
+            digitalIdentityComboBox.addItem("Subject Key Identifier");
+        }
+        digitalIdentityComboBox.setSelectedIndex(index);
+    }
+
+    public void setCertificate(X509Certificate certificate) {
+        this.certificate = certificate;
+    }
+
+    public void setHistoric(boolean isHistoric) {
+        this.isHistoric = isHistoric;
     }
 }

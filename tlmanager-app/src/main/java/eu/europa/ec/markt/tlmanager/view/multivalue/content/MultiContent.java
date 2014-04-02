@@ -133,6 +133,16 @@ public abstract class MultiContent<T> {
     }
 
     /**
+     * Returns all keys.
+     *
+     * @return list of key in the collection
+     */
+    public java.util.List<String> getKeys() {
+        LOG.trace( "Get values for {} in {}", new Object[]{this});
+        return multiValueModel.getKeys();
+    }
+
+    /**
      * Creates a new item in the value model and sets it to "".
      *
      * @return the key to access that item

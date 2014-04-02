@@ -41,13 +41,25 @@ public class DigitalIdentityModel {
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(DigitalIdentityModel.class);
 
     private DigitalIdentityType digitalIdentity;
+    private boolean isHistoric;
+    
+    public boolean isHistoric() {
+        return isHistoric;
+    }
 
     public DigitalIdentityModel() {
         digitalIdentity = new DigitalIdentityType();
+        isHistoric = false;
     }
 
     public DigitalIdentityModel(DigitalIdentityType digitalIdentity) {
         this.digitalIdentity = digitalIdentity;
+        isHistoric = false;
+    }
+    
+    public DigitalIdentityModel(DigitalIdentityType digitalIdentity, boolean isHistoric) {
+        this.digitalIdentity = digitalIdentity;
+        this.isHistoric = isHistoric;
     }
 
     public X509Certificate getCertificate() {
@@ -61,6 +73,7 @@ public class DigitalIdentityModel {
     public void setCertificate(X509Certificate certificate) {
         digitalIdentity.setX509SKI(null);
         digitalIdentity.setX509SubjectName(null);
+        
         try {
             if (certificate != null) {
                 digitalIdentity.setX509Certificate(certificate.getEncoded());

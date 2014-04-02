@@ -50,6 +50,7 @@ public class DigitalIdentitySubjectNamePanel extends JPanel implements ContentDi
 
     private JFileChooser fileChooser;
     private DigitalIdentityModel digitalIdentityModel;
+    private X509Certificate certificate;
 
     /**
      * The default constructor for DigitalIdentityPanel.
@@ -99,13 +100,17 @@ public class DigitalIdentitySubjectNamePanel extends JPanel implements ContentDi
     public void refresh() {
         // clean data
         subject.setText("");
-
+        
+        String subjectName = "";
         if (digitalIdentityModel != null) {
-
-            final String subjectName = digitalIdentityModel.getSubjectName();
-            if (subjectName != null) {
-                subject.setText(subjectName);
-            }
+            subjectName = digitalIdentityModel.getSubjectName();
+        }
+        if(certificate != null && subjectName.equals("")){
+            subjectName = DSSUtils.getSubjectX500PrincipalName(certificate);
+        }
+        
+        if (subjectName != null) {
+            subject.setText(subjectName);
         }
     }
 
@@ -117,20 +122,11 @@ public class DigitalIdentitySubjectNamePanel extends JPanel implements ContentDi
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        selectCertificate = new JButton();
-        subjectScrollPane = new JScrollPane();
-        subject = new JTextArea();
-        subjectLabel = new JLabel();
+        subjectScrollPane = new javax.swing.JScrollPane();
+        subject = new javax.swing.JTextArea();
+        subjectLabel = new javax.swing.JLabel();
 
         setName("DigitalIdentityPanel"); // NOI18N
-
-        selectCertificate.setText(uiKeys.getString("DigitalIdentityPanel.loadFromCertificate")); // NOI18N
-        selectCertificate.setName("selectCertificate"); // NOI18N
-        selectCertificate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                selectCertificateActionPerformed(evt);
-            }
-        });
 
         subject.setColumns(5);
         subject.setLineWrap(true);
@@ -140,20 +136,25 @@ public class DigitalIdentitySubjectNamePanel extends JPanel implements ContentDi
 
         subjectLabel.setText(uiKeys.getString("DigitalIdentityPanel.subject")); // NOI18N
 
-        GroupLayout layout = new GroupLayout(this);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addContainerGap().addGroup(
-                    layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                          .addGroup(layout.createSequentialGroup().addComponent(selectCertificate).addGap(0, 0, Short.MAX_VALUE)).addGroup(
-                          layout.createSequentialGroup().addComponent(subjectLabel).addGap(42, 42, 42)
-                                .addComponent(subjectScrollPane, GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
-                    )
-              ).addContainerGap())
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(subjectLabel)
+                .addGap(42, 42, 42)
+                .addComponent(subjectScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addContainerGap().addGroup(
-                    layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(subjectLabel)
-                          .addComponent(subjectScrollPane, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-              ).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE).addComponent(selectCertificate).addContainerGap())
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(subjectLabel)
+                    .addComponent(subjectScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -173,10 +174,9 @@ public class DigitalIdentitySubjectNamePanel extends JPanel implements ContentDi
     }// GEN-LAST:event_closeButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private JButton selectCertificate;
-    private JTextArea subject;
-    private JLabel subjectLabel;
-    private JScrollPane subjectScrollPane;
+    private javax.swing.JTextArea subject;
+    private javax.swing.JLabel subjectLabel;
+    private javax.swing.JScrollPane subjectScrollPane;
     // End of variables declaration//GEN-END:variables
     /*
      * (non-Javadoc)
@@ -221,6 +221,10 @@ public class DigitalIdentitySubjectNamePanel extends JPanel implements ContentDi
             info = subjectText;
         }
         return info;
+    }
+
+    void setCertificate(X509Certificate certificate) {
+        this.certificate = certificate;
     }
 
 }

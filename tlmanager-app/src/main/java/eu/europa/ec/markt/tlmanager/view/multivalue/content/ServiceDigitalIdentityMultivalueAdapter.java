@@ -56,14 +56,21 @@ public class ServiceDigitalIdentityMultivalueAdapter implements MultipleModel<Di
 
     private final DigitalIdentityListType digitalIdentityList;
     private Map<String, DigitalIdentityModel> ids = new HashMap<String, DigitalIdentityModel>();
+    
 
     private int i = 1;
+    private boolean historyPanel;
 
     /**
      * The default constructor for ServiceDigitalIdentityMultivalueAdapter.
      */
     public ServiceDigitalIdentityMultivalueAdapter(DigitalIdentityListType digitalIdentityList) {
+        this(digitalIdentityList,false);
+    }
+
+    public ServiceDigitalIdentityMultivalueAdapter(DigitalIdentityListType digitalIdentityList, boolean historyPanel) {
         this.digitalIdentityList = digitalIdentityList;
+        this.historyPanel = historyPanel;
         initMultiModel();
     }
 
@@ -71,8 +78,9 @@ public class ServiceDigitalIdentityMultivalueAdapter implements MultipleModel<Di
 
         final List<DigitalIdentityType> digitalIdList = digitalIdentityList.getDigitalId();
         for (DigitalIdentityType digitalIdentityType : digitalIdList) {
-            ids.put(createNewItem(), new DigitalIdentityModel(digitalIdentityType));
+            ids.put(createNewItem(), new DigitalIdentityModel(digitalIdentityType, isHistoricalPanel()));
         }
+
     }
 
     @Override
@@ -112,6 +120,7 @@ public class ServiceDigitalIdentityMultivalueAdapter implements MultipleModel<Di
         if (existingDigitalIdentityModel == null) {
             existingDigitalIdentityModel = new DigitalIdentityModel();
         }
+
         if (newDigitalIdentityModel != null) {
             if (newDigitalIdentityModel.getCertificate() != null) {
                 existingDigitalIdentityModel.setCertificate(newDigitalIdentityModel.getCertificate());
@@ -142,7 +151,7 @@ public class ServiceDigitalIdentityMultivalueAdapter implements MultipleModel<Di
 
     @Override
     public void updateBeanValues() {
-        LOG.info("Update bean value");
+        LOG.info("Update bean values");
         final List<DigitalIdentityType> digitalIdList = digitalIdentityList.getDigitalId();
         digitalIdList.clear();
         for (Iterator<Map.Entry<String, DigitalIdentityModel>> iterator = ids.entrySet().iterator(); iterator.hasNext(); ) {
@@ -160,6 +169,7 @@ public class ServiceDigitalIdentityMultivalueAdapter implements MultipleModel<Di
     @Override
     public String createNewItem() {
         String key = "Item " + i++;
+
         return key;
     }
 
@@ -170,6 +180,10 @@ public class ServiceDigitalIdentityMultivalueAdapter implements MultipleModel<Di
 
     public DigitalIdentityListType getDigitalIdentityList() {
         return digitalIdentityList;
+    }
+    
+    public boolean isHistoricalPanel(){
+        return this.historyPanel;
     }
 
 }

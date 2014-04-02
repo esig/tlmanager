@@ -36,12 +36,18 @@ import eu.europa.ec.markt.tsl.jaxb.tsl.DigitalIdentityListType;
  */
 public class ServiceDigitalIdentityConverter extends Converter<DigitalIdentityListType, ServiceDigitalIdentityMultivalueAdapter> {
 
+    private boolean isHistoryPanel = false;
     public ServiceDigitalIdentityConverter() {
+        this(false);
+    }
+    
+    public ServiceDigitalIdentityConverter(boolean isHistoryPanel) {
+        this.isHistoryPanel = isHistoryPanel;
     }
 
     @Override
     public ServiceDigitalIdentityMultivalueAdapter convertForward(DigitalIdentityListType value) {
-        return new ServiceDigitalIdentityMultivalueAdapter(value);
+        return new ServiceDigitalIdentityMultivalueAdapter(value, isHistoryPanel);
     }
 
     @Override

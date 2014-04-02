@@ -261,7 +261,7 @@ public class ServiceStatusHistoryPage extends TreeDataPublisher {
         bindingManager.appendConverter(new InternationalNamesConverter(), QNames._ServiceName);
 
         bindingManager.createBindingForComponent(serviceDigitalIdentityButton.getMultivaluePanel(), "serviceDigitalIdentity", QNames._ServiceDigitalIdentity_QNAME.getLocalPart());
-        bindingManager.appendConverter(new ServiceDigitalIdentityConverter(), QNames._ServiceDigitalIdentity_QNAME.getLocalPart());
+        bindingManager.appendConverter(new ServiceDigitalIdentityConverter(true), QNames._ServiceDigitalIdentity_QNAME.getLocalPart());
 
         bindingManager.createBindingForComponent(servicePreviousStatus, "serviceStatus", QNames._ServiceStatus_QNAME.getLocalPart());
 

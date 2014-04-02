@@ -24,6 +24,7 @@ import java.awt.*;
 
 import eu.europa.ec.markt.tlmanager.view.certificate.DigitalIdentityModel;
 import eu.europa.ec.markt.tlmanager.view.panel.DigitalIdentityPanel;
+import java.security.cert.X509Certificate;
 
 /**
  * TODO
@@ -56,6 +57,7 @@ public class DigitalIdentityContent extends MultiContent<DigitalIdentityModel> {
     @Override
     protected DigitalIdentityModel retrieveComponentValue(boolean clearOnExit) {
         DigitalIdentityModel model = panel.getDigitalIdentityModel();
+
         if (clearOnExit) {
             panel.clearOnExit();
         }
@@ -72,6 +74,23 @@ public class DigitalIdentityContent extends MultiContent<DigitalIdentityModel> {
         DigitalIdentityModel value = getValue(currentKey);
         LOG.info("... value is " + value);
         panel.updateCurrentValues(value);
+
+        DigitalIdentityModel model = panel.getDigitalIdentityModel();
+        panel.setHistoric(true);
+
+        //Check if there is a Certificate defined in Digital ID
+        boolean certificateFound = false;
+        java.util.List<String> listOfCollectionKeys = getKeys();
+        X509Certificate certificate = null;
+        int i = 0;
+        while(!certificateFound && listOfCollectionKeys.size()>i) {
+            DigitalIdentityModel dIvalue = getValue(listOfCollectionKeys.get(i));
+            certificateFound = dIvalue.getCertificate() != null;
+            certificate = dIvalue.getCertificate();
+            i++;
+        }
+        panel.setHasCertificate(certificateFound);
+        panel.setCertificate(certificate);
     }
 
 }
