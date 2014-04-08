@@ -29,15 +29,15 @@
  */
 package eu.europa.ec.markt.tlmanager.view.multivalue.content;
 
+import eu.europa.ec.markt.tlmanager.view.multivalue.MultipleModel;
+import eu.europa.ec.markt.tsl.jaxb.tsl.DigitalIdentityListType;
+import eu.europa.ec.markt.tsl.jaxb.tsl.ServiceDigitalIdentityListType;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import eu.europa.ec.markt.tlmanager.view.multivalue.MultipleModel;
-import eu.europa.ec.markt.tsl.jaxb.tsl.DigitalIdentityListType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.ServiceDigitalIdentityListType;
 
 /**
  * TODO
@@ -163,4 +163,7 @@ public class ServiceDigitalIdentitiesMultivalueAdapter implements MultipleModel<
         return result;
     }
 
+    public ServiceDigitalIdentityListType getServiceDigitalIdentityListType() {
+        return serviceDigitalIdentityListType;
+    }
 }

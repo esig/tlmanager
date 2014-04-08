@@ -20,10 +20,9 @@
 
 package eu.europa.ec.markt.tlmanager.view.binding;
 
-import org.jdesktop.beansbinding.Converter;
-
 import eu.europa.ec.markt.tlmanager.view.multivalue.content.ServiceDigitalIdentityMultivalueAdapter;
 import eu.europa.ec.markt.tsl.jaxb.tsl.DigitalIdentityListType;
+import org.jdesktop.beansbinding.Converter;
 
 /**
  * TODO

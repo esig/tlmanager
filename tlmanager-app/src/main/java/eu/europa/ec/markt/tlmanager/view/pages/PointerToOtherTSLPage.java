@@ -20,6 +20,19 @@
 
 package eu.europa.ec.markt.tlmanager.view.pages;
 
+import eu.europa.ec.markt.tlmanager.core.Configuration;
+import eu.europa.ec.markt.tlmanager.core.QNames;
+import eu.europa.ec.markt.tlmanager.model.treeNodes.TSLDataNode;
+import eu.europa.ec.markt.tlmanager.util.Util;
+import eu.europa.ec.markt.tlmanager.view.binding.*;
+import eu.europa.ec.markt.tlmanager.view.common.TitledPanel;
+import eu.europa.ec.markt.tlmanager.view.multivalue.MultiMode;
+import eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton;
+import eu.europa.ec.markt.tsl.jaxb.tsl.*;
+
+import javax.swing.*;
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
 import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -27,29 +40,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.Serializable;
 import java.util.List;
-
-import javax.swing.*;
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
-
-import eu.europa.ec.markt.tlmanager.core.Configuration;
-import eu.europa.ec.markt.tlmanager.core.QNames;
-import eu.europa.ec.markt.tlmanager.model.treeNodes.TSLDataNode;
-import eu.europa.ec.markt.tlmanager.util.Util;
-import eu.europa.ec.markt.tlmanager.view.binding.BindingManager;
-import eu.europa.ec.markt.tlmanager.view.binding.InternationalNamesConverter;
-import eu.europa.ec.markt.tlmanager.view.binding.NonEmptyMultiLangURIListConverter;
-import eu.europa.ec.markt.tlmanager.view.binding.NonEmptyURIListToStringConverter;
-import eu.europa.ec.markt.tlmanager.view.common.TitledPanel;
-import eu.europa.ec.markt.tlmanager.view.multivalue.MultiMode;
-import eu.europa.ec.markt.tlmanager.view.multivalue.MultivalueButton;
-import eu.europa.ec.markt.tlmanager.view.multivalue.MultivaluePanel;
-import eu.europa.ec.markt.tlmanager.view.multivalue.content.ServiceDigitalIdentitiesMultivalueAdapter;
-import eu.europa.ec.markt.tsl.jaxb.tsl.AnyType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.InternationalNamesType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.NonEmptyMultiLangURIListType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.NonEmptyMultiLangURIType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.OtherTSLPointerType;
 
 /**
  * Content page for managing all below a <tsl:OtherTSLPointer/>.
@@ -300,7 +290,9 @@ public class PointerToOtherTSLPage extends TreeDataPublisher {
 
         bindingManager.createBindingForComponent(tslLocation, "TSLLocation", QNames._TSLLocation);
 
-        bindingManager.createBindingForComponent(digitalIdButton.getMultivaluePanel(), "value", QNames._ServiceDigitalIdentities_QNAME.getLocalPart());
+        bindingManager.createBindingForComponent(digitalIdButton.getMultivaluePanel(), "serviceDigitalIdentities", QNames._ServiceDigitalIdentities_QNAME.getLocalPart());
+        bindingManager.appendConverter(new ServiceDigitalIdentitiesConverter(), QNames._ServiceDigitalIdentities_QNAME.getLocalPart());
+
         bindingManager.createBindingForComponent(schemeOperatorName.getMultivaluePanel(), "value", QNames._SchemeOperatorName_QNAME.getLocalPart());
         bindingManager.appendConverter(new InternationalNamesConverter(), QNames._SchemeOperatorName_QNAME.getLocalPart());
 
@@ -355,11 +347,6 @@ public class PointerToOtherTSLPage extends TreeDataPublisher {
         LOG.debug( "Value changed {}", pointer);
         bindingManager.unbindAll();
 
-        ServiceDigitalIdentitiesMultivalueAdapter serviceDigitalIdentitiesMultivalueAdapter = new ServiceDigitalIdentitiesMultivalueAdapter(pointer.getServiceDigitalIdentities());
-        LOG.info("Model for digitalId " + serviceDigitalIdentitiesMultivalueAdapter);
-        final MultivaluePanel multivaluePanel = digitalIdButton.getMultivaluePanel();
-        multivaluePanel.setMultivalueModel(serviceDigitalIdentitiesMultivalueAdapter);
-
         bindingManager.amendSourceForBinding(pointer, QNames._ServiceDigitalIdentities_QNAME.getLocalPart());
         bindingManager.amendSourceForBinding(pointer, QNames._TSLLocation);
 
@@ -370,7 +357,7 @@ public class PointerToOtherTSLPage extends TreeDataPublisher {
         {
             JAXBElement<NonEmptyMultiLangURIListType> concreteElement = (JAXBElement<NonEmptyMultiLangURIListType>) getAdditionalDataNode(QNames._SchemeTypeCommunityRules_QNAME);
             bindingManager.amendSourceForBinding(concreteElement, QNames._SchemeTypeCommunityRules_QNAME.getLocalPart());
-            if (Configuration.getInstance().isTlMode() && concreteElement.getValue().getURI().isEmpty()) {
+            if (Configuration.getInstance().isTlMode() && concreteElement !=null && concreteElement.getValue() !=null && concreteElement.getValue().getURI() != null && concreteElement.getValue().getURI().isEmpty()) {
                 // if in tl mode: take the community rules string from the lotl
                 String[] stcr = Configuration.getInstance().getLOTL().getTslSchemeTypeCommunityRules();
                 final NonEmptyMultiLangURIType nonEmptyMultiLangURIType = new NonEmptyMultiLangURIType();
