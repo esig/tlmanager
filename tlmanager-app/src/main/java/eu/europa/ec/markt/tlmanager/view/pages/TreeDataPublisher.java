@@ -167,7 +167,7 @@ public abstract class TreeDataPublisher extends JPanel implements MandatoryLabel
             }
             if (label.getLabelFor().equals(component)) {
                 boolean empty = false;
-                boolean noCertificate = true;
+                boolean noCertificate = false;
                 if (component instanceof JTextField) {
                     JTextField tf = (JTextField) component;
                     if (tf.getText().isEmpty()) {
