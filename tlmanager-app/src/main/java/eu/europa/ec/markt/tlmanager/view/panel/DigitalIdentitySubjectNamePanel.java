@@ -101,11 +101,12 @@ public class DigitalIdentitySubjectNamePanel extends JPanel implements ContentDi
         // clean data
         subject.setText("");
         
-        String subjectName = "";
+        String subjectName = null;
         if (digitalIdentityModel != null) {
             subjectName = digitalIdentityModel.getSubjectName();
         }
-        if(certificate != null && subjectName.equals("")){
+
+        if(subjectName==null && certificate != null){
             subjectName = DSSUtils.getSubjectX500PrincipalName(certificate);
         }
         
