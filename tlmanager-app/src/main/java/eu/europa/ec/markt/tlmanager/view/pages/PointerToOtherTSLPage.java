@@ -321,14 +321,15 @@ public class PointerToOtherTSLPage extends TreeDataPublisher {
                 if (content.isEmpty()) {
                     continue;
                 }
-                Object object = content.get(0);
-                if (object != null && object instanceof JAXBElement<?>) {
-                    element = (JAXBElement<Object>) object;
-                }
-                if (element != null && object != null) {
-                    // tsl:SchemeOperatorName
-                    if (element.getName().getLocalPart().equals(qname.getLocalPart())) {
-                        return object;
+                for (final Object object : content) {
+                    if (object != null && object instanceof JAXBElement<?>) {
+                        element = (JAXBElement<Object>) object;
+                    }
+                    if (element != null && object != null) {
+                        // tsl:SchemeOperatorName
+                        if (element.getName().getLocalPart().equals(qname.getLocalPart())) {
+                            return object;
+                        }
                     }
                 }
             }
