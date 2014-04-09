@@ -206,11 +206,16 @@ public abstract class TreeDataPublisher extends JPanel implements MandatoryLabel
                         Object dIvalue = button.getMultivaluePanel().getMultivalueModel().getValue(value.toString());
                         if(dIvalue instanceof DigitalIdentityModel){
                             DigitalIdentityModel dit = (DigitalIdentityModel) dIvalue;
-                            if(!dit.isHistoric()) {
+                            if(!dit.isHistorical()) {
                                 noCertificate =(dit.getCertificate() == null);
+                                //Certificate is founded, breack the loop
+                                if(noCertificate == false){
+                                    break;
+                                }
                             }else{
                                 //Certificate not mandatory for Historical Panel
                                 noCertificate = false;
+                                break;
                             }
                         }
                     }

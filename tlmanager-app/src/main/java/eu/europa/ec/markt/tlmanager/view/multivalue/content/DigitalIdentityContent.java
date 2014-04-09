@@ -76,7 +76,7 @@ public class DigitalIdentityContent extends MultiContent<DigitalIdentityModel> {
         panel.updateCurrentValues(value);
 
         DigitalIdentityModel model = panel.getDigitalIdentityModel();
-        panel.setHistoric(true);
+        panel.setHistorical(true);
 
         //Check if there is a Certificate defined in Digital ID
         boolean certificateFound = false;
@@ -89,7 +89,6 @@ public class DigitalIdentityContent extends MultiContent<DigitalIdentityModel> {
             certificate = dIvalue.getCertificate();
             i++;
         }
-        panel.setHasCertificate(certificateFound);
         panel.setCertificate(certificate);
     }
 

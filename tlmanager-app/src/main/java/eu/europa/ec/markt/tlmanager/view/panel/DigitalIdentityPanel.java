@@ -18,13 +18,18 @@ public class DigitalIdentityPanel extends javax.swing.JPanel {
     public DigitalIdentityModel digitalIdentityModel;
     private boolean hasCertificat = false;
     private X509Certificate certificate;
-    private boolean isHistoric = false;
+    private boolean isHistorical = false;
 
+    /**
+     * Getter for certificate
+     * @return
+     */
     public X509Certificate getCertificate() {
         return certificate;
     }
 
     /**
+     * Creates new form DigitalIdentityPanel
      * Creates new form DigitalIdentityPanel
      */
     public DigitalIdentityPanel() {
@@ -101,17 +106,27 @@ public class DigitalIdentityPanel extends javax.swing.JPanel {
         if (selectedItem != null) {
             if ("Certificate".equals(selectedItem)) {
                 showCertificate();
+                if(digitalIdentityModel != null && digitalIdentityModel.getCertificate() != null){
+                    digitalIdentityComboBox.setEnabled(false);
+                }
             } else if ("Subject Name".equals(selectedItem)) {
-                if(hasCertificat || isHistoric) {
+                if(hasCertificat || isHistorical) {
                     showSubjectName();
+                    if(digitalIdentityModel != null && digitalIdentityModel.getSubjectName() != null && !digitalIdentityModel.getSubjectName().equals("")){
+                        digitalIdentityComboBox.setEnabled(false);
+                    }
                 }
             } else if ("Subject Key Identifier".equals(selectedItem)) {
-                if(hasCertificat || isHistoric) {
+                if(hasCertificat || isHistorical) {
                     showSki();
+                    if(digitalIdentityModel != null && digitalIdentityModel.getSKI() != null && !digitalIdentityModel.getSKI().equals("")){
+                        digitalIdentityComboBox.setEnabled(false);
+                    }
                 }
             }
         } else {
             digitalIdentityModel.setCertificate(null);
+            digitalIdentityComboBox.setEnabled(true);
             hideAll();
         }
     }//GEN-LAST:event_digitalIdentityComboBoxItemStateChanged
@@ -219,24 +234,35 @@ public class DigitalIdentityPanel extends javax.swing.JPanel {
         updateCurrentValues(digitalIdentityModel);
     }
 
-    public void setHasCertificate(boolean b) {
-        hasCertificat = b;
-        
+    /**
+     * Update list of Digital Identity according to type (Current or Historical)
+     */
+    public void setHasCertificate() {
         int index = digitalIdentityComboBox.getSelectedIndex();
         digitalIdentityComboBox.removeItem("Subject Name");
         digitalIdentityComboBox.removeItem("Subject Key Identifier");
-        if(hasCertificat || isHistoric){
+        if(hasCertificat || isHistorical){
             digitalIdentityComboBox.addItem("Subject Name");
             digitalIdentityComboBox.addItem("Subject Key Identifier");
         }
         digitalIdentityComboBox.setSelectedIndex(index);
     }
 
+    /**
+     * Setter of certificate
+     * @param certificate
+     */
     public void setCertificate(X509Certificate certificate) {
         this.certificate = certificate;
+        hasCertificat = certificate != null;
+        setHasCertificate();
     }
 
-    public void setHistoric(boolean isHistoric) {
-        this.isHistoric = isHistoric;
+    /**
+     * Setter for historical
+     * @param isHistorical
+     */
+    public void setHistorical(boolean isHistorical) {
+        this.isHistorical = isHistorical;
     }
 }
