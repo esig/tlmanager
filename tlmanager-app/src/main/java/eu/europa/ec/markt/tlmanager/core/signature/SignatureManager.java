@@ -294,12 +294,29 @@ public class SignatureManager {
      * @throws java.io.IOException
      */
     public void sign() throws IOException {
+
         final DSSPrivateKeyEntry pk = determineCurrentPK();
 
         final SignatureParameters parameters = new SignatureParameters();
         parameters.setDigestAlgorithm(digestAlgorithm);
 
         parameters.setPrivateKeyEntry(pk);
+        /**
+         * 5.7 Signature
+         * 5.7.1 Signed Trusted List
+         * The trusted list shall be signed by the 'Scheme operator name' (clause 5.3.4) to ensure its authenticity and integrity.
+         * The format of the signature shall be XAdES BES or EPES as defined by TS 101 903 [3]. Such electronic signature
+         * implementation shall meet requirements as stated in annex B. The signature algorithm as well as the certified signature
+         * key shall conform to security requirement for a minimum 3 years usable key as specified in Table 14 of
+         * TS 102 176-1 [2].
+         * The TLSO certificate, to be used to verify its signature on the TL, shall be protected with the signature in one of the
+         * ways specified by TS 101 903 [3]. The SigningCertificate signed attribute (or property) available in TS 101 903 [3]
+         * signatures should be used for this purpose.
+         *
+         * <b>The ds:keyInfo shall not contain any associated certificate chain.</b>
+         */
+        parameters.clearCertificateChain();
+        parameters.setCertificateChain(parameters.getSigningCertificate());
         parameters.setSignatureLevel(signatureLevel);
         parameters.setSignaturePackaging(signaturePackaging);
 
