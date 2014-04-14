@@ -20,31 +20,6 @@
 
 package eu.europa.ec.markt.tlmanager.core.validation;
 
-import java.io.Serializable;
-import java.lang.reflect.Method;
-import java.math.BigInteger;
-import java.security.PublicKey;
-import java.security.cert.X509Certificate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.security.auth.x500.X500Principal;
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import eu.europa.ec.markt.dss.DSSUtils;
 import eu.europa.ec.markt.dss.exception.DSSException;
 import eu.europa.ec.markt.tlmanager.core.Configuration;
@@ -52,45 +27,28 @@ import eu.europa.ec.markt.tlmanager.core.Configuration.CountryCodes;
 import eu.europa.ec.markt.tlmanager.core.QNames;
 import eu.europa.ec.markt.tlmanager.core.validation.StatusInformationFlow.Status;
 import eu.europa.ec.markt.tlmanager.util.Util;
-import eu.europa.ec.markt.tsl.jaxb.ecc.CriteriaListType;
-import eu.europa.ec.markt.tsl.jaxb.ecc.KeyUsageBitType;
-import eu.europa.ec.markt.tsl.jaxb.ecc.KeyUsageType;
-import eu.europa.ec.markt.tsl.jaxb.ecc.PoliciesListType;
-import eu.europa.ec.markt.tsl.jaxb.ecc.QualificationElementType;
-import eu.europa.ec.markt.tsl.jaxb.ecc.QualificationsType;
-import eu.europa.ec.markt.tsl.jaxb.ecc.QualifierType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.AdditionalServiceInformationType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.AnyType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.DigitalIdentityListType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.DigitalIdentityType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.ElectronicAddressType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.ExtensionType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.ExtensionsListType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.InternationalNamesType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.MultiLangNormStringType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.MultiLangStringType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.NextUpdateType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.NonEmptyMultiLangURIListType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.NonEmptyMultiLangURIType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.NonEmptyURIListType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.OtherTSLPointerType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.PostalAddressType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.ServiceHistoryInstanceType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.ServiceHistoryType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.TSLSchemeInformationType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.TSPInformationType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.TSPServiceInformationType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.TSPServiceType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.TSPServicesListType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.TSPType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.TrustServiceProviderListType;
-import eu.europa.ec.markt.tsl.jaxb.tsl.TrustStatusListType;
+import eu.europa.ec.markt.tsl.jaxb.ecc.*;
+import eu.europa.ec.markt.tsl.jaxb.tsl.*;
 import eu.europa.ec.markt.tsl.jaxb.tslx.CertSubjectDNAttributeType;
 import eu.europa.ec.markt.tsl.jaxb.tslx.ExtendedKeyUsageType;
 import eu.europa.ec.markt.tsl.jaxb.tslx.TakenOverByType;
 import eu.europa.ec.markt.tsl.jaxb.xades.IdentifierType;
 import eu.europa.ec.markt.tsl.jaxb.xades.ObjectIdentifierType;
 import eu.europa.ec.markt.tsl.jaxb.xmldsig.KeyValueType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.security.auth.x500.X500Principal;
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
+import java.io.Serializable;
+import java.lang.reflect.Method;
+import java.math.BigInteger;
+import java.security.PublicKey;
+import java.security.cert.X509Certificate;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Validation of a {@code TrustStatusListType}.
@@ -1054,7 +1012,7 @@ public class Validation {
      * If the type of the TSL is 'generic', the number of pointer to other TSL must be equal to 2.
      */
     private void checkRulePointerToOtherTSL() {
-        if (Configuration.getInstance().isTlMode()) {
+        if (Configuration.getInstance().isTlMode() && Configuration.getInstance().isEuMode()) {
             if (pointers == null || pointers.size() != 2) {
                 final String message = uiKeys.getString("Validation.rule.pointerToOtherTSL.tl");
                 LOG.error(message);
