@@ -84,7 +84,7 @@ public abstract class MultiContent<T> {
 
     /*
      * DEV_NOTE about the 'justOpened' flag: this method is called directly from the item selection listener in the
-     * multivaluePanel, which means, it's called when the multicontent panel is displayed for the first time. there is
+     * multivaluePanel, which means, it's called when the multi-content panel is displayed for the first time. there is
      * no content (component value) available at that time and componentValue will be "" (or null, depending on the
      * implementation). if this value is set in the model the actual value (if any) is lost! this is against the whole
      * 'strategy' of setting/saving the values upon updating the content, when another item is selected. the flag

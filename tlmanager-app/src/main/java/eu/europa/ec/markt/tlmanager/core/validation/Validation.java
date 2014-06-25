@@ -751,7 +751,7 @@ public class Validation {
                                 validateList(name, QNames._SchemeOperatorName_QNAME.getLocalPart(), list.getName(), pointer);
                             } else if (element.getName().equals(QNames._SchemeTypeCommunityRules_QNAME)) {
                                 if (!Configuration.getInstance().isTlMode()) {
-                                    NonEmptyURIListType list = (NonEmptyURIListType) element.getValue();
+	                                NonEmptyMultiLangURIListType list = (NonEmptyMultiLangURIListType) element.getValue();
                                     validateList(name, QNames._SchemeTypeCommunityRules_QNAME.getLocalPart(), list.getURI(), pointer);
                                 }
                             } else if (element.getName().equals(QNames._SchemeTerritory_QNAME)) {
@@ -1975,10 +1975,12 @@ public class Validation {
                               uiKeys.getString("Validation.rule.qualificationExtensionApplicability.reference.history"));
                     }
                 }
-                if (caqc.equals(service.getServiceInformation().getServiceTypeIdentifier())) {
+	            final TSPServiceInformationType serviceInformation = service.getServiceInformation();
+	            final String serviceTypeIdentifier = serviceInformation.getServiceTypeIdentifier();
+	            if (caqc.equals(serviceTypeIdentifier)) {
                     continue;
                 }
-                applicabilityQualificationExtensionHelper(service.getServiceInformation().getServiceInformationExtensions(),
+                applicabilityQualificationExtensionHelper(serviceInformation.getServiceInformationExtensions(),
                       uiKeys.getString("Validation.rule.qualificationExtensionApplicability.reference.service"));
             }
         }
@@ -1993,7 +1995,7 @@ public class Validation {
                 JAXBElement<?> element = Util.extractJAXBElement(extensionType);
                 AdditionalServiceInformationType asi = (AdditionalServiceInformationType) element.getValue();
                 String uri = asi.getURI().getValue();
-                // although everything else is parameterized, this is a 'specific'
+                // although everything else is parametrized, this is a 'specific'
                 // rule to check which justifies usage of hardcoded values here
                 boolean ok = false;
                 boolean uriIsToBeChecked = false;
