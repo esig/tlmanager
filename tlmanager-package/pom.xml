@@ -9,12 +9,11 @@
         <groupId>eu.europa.ec.joinup.sd-dss</groupId>
         <artifactId>tl-manager</artifactId>
         <version>4.1.7-SNAPSHOT</version>
-        <relativePath>..</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <name>TLManager DSS Package</name>
     <description>TLManager Application of Project DSS</description>
-    <groupId>eu.europa.ec.joinup.sd-dss</groupId>
     <artifactId>tlmanager-package</artifactId>
     <packaging>jar</packaging>
 
@@ -80,7 +79,7 @@
         <dependency>
             <groupId>eu.europa.ec.joinup.sd-dss</groupId>
             <artifactId>tlmanager-app</artifactId>
-            <version>4.1.7-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 
