@@ -173,8 +173,10 @@ public class ObjectFiller {
 				}
 			}
 
-			// tsl:StatusDeterminationApproach - overwrite any potential different values
-			info.setStatusDeterminationApproach(Configuration.getInstance().getTSL().getTslStatusDeterminationApproach());
+			// tsl:StatusDeterminationApproach
+			if (info.getStatusDeterminationApproach() == null) {
+				info.setStatusDeterminationApproach(Configuration.getInstance().getTSL().getTslStatusDeterminationApproach());
+			}
 
 			// tsl:historicalInformationPeriod - overwrite
 			info.setHistoricalInformationPeriod(Configuration.getInstance().getHistoricalInformationPeriod());

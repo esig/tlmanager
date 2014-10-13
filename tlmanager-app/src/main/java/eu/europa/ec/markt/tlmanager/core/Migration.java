@@ -110,11 +110,11 @@ public class Migration {
      */
     public boolean migrate() {
 
-        updateTSLVersionIdentifier();
         updateTSLType();
         updateSchemaName();
         updatePolicyOrLegalNotice();
         updateStatusDeterminationApproach();
+        updateTSLVersionIdentifier();
         updateTSP();
         updatePointers();
         updateSchemeTypeCommunityRules();
@@ -139,6 +139,8 @@ public class Migration {
     private void updateTSLType() {
 
         final TSLSchemeInformationType schemeInformation = tsl.getSchemeInformation();
+        final BigInteger tslVersionIdentifier = schemeInformation.getTSLVersionIdentifier();
+
         if (schemeInformation != null) {
 
             final String tslType = schemeInformation.getTSLType();
@@ -150,7 +152,7 @@ public class Migration {
 
                 newTslType = "http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUlistofthelists";
             }
-            if (!tslType.equals(newTslType)) {
+            if (!tslType.equals(newTslType) && !tslVersionIdentifier.equals(TSL_VERSION_TARGET)) {
 
                 schemeInformation.setTSLType(newTslType);
                 LOG.info("MIGRATED: '{}' --> '{}'", tslType, newTslType);
