@@ -7,7 +7,7 @@
 
     <name>Organisational pom for Application TLManager</name>
     <groupId>eu.europa.ec.joinup.sd-dss</groupId>
-    <version>4.1.7</version>
+    <version>4.1.8-SNAPSHOT</version>
     <artifactId>tl-manager</artifactId>
     <packaging>pom</packaging>
 
