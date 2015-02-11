@@ -17,7 +17,7 @@
     </modules>
 
     <properties>
-        <dss.version>4.3.0</dss.version>
+        <dss.version>4.3.0-SNAPSHOT</dss.version>
         <beansbinding.version>1.2.1</beansbinding.version>
         <mockito.version>1.9.5</mockito.version>
         <junit.version>4.11</junit.version>

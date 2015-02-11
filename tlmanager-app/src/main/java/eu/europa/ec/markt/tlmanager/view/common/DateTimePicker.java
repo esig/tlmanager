@@ -32,7 +32,10 @@ import java.util.Date;
 import javax.swing.SpinnerDateModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.text.DateFormatter;
+import javax.swing.text.DefaultFormatterFactory;
 
+import eu.europa.ec.markt.dss.common.TooltipHelper;
 import eu.europa.ec.markt.tlmanager.core.Configuration;
 
 /**
@@ -44,7 +47,10 @@ import eu.europa.ec.markt.tlmanager.core.Configuration;
  */
 public class DateTimePicker extends javax.swing.JPanel {
 
-	private static final String MM_DD_YYYY = "MM/dd/yyyy";
+	private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(DateTimePicker.class);
+
+	private static final String YYYY_MM_DD = "yyyy-MM-dd";
+	private static final String TOOLTIP_TEXT = "yyyy-mm-dd";
 
 	private Date dateTime;
 	private boolean changingState = false;
@@ -53,8 +59,11 @@ public class DateTimePicker extends javax.swing.JPanel {
 	public DateTimePicker() {
 		initComponents();
 
-		SimpleDateFormat sdf = new SimpleDateFormat(MM_DD_YYYY);
-		picker.setFormats(sdf);
+		DateFormatter df = new DateFormatter(new SimpleDateFormat(YYYY_MM_DD));
+		DefaultFormatterFactory factory = new DefaultFormatterFactory(df);
+		picker.getEditor().setFormatterFactory(factory);
+
+		picker.getEditor().setToolTipText(TOOLTIP_TEXT);
 
 		addListeners();
 
@@ -75,14 +84,16 @@ public class DateTimePicker extends javax.swing.JPanel {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				char keyChar = e.getKeyChar();
-				if (Character.isDigit(keyChar) || (KeyEvent.VK_BACK_SLASH == e.getKeyCode()) || isCtrlV(e)) {
+				if (Character.isDigit(keyChar) || (KeyEvent.VK_MINUS == e.getKeyCode()) || isCtrlV(e)) {
 					String text = picker.getEditor().getText();
-					SimpleDateFormat sdf = new SimpleDateFormat(MM_DD_YYYY);
-					try {
-						Date date = sdf.parse(text);
-						setDateTime(date);
-					} catch (ParseException ex) {
-						setDateTime(null);
+					if (text.matches("\\d{4}-\\d{2}-\\d{2}")) {
+						SimpleDateFormat sdf = new SimpleDateFormat(YYYY_MM_DD);
+						try {
+							Date date = sdf.parse(text);
+							setDateTime(date);
+						} catch (ParseException ex) {
+							setDateTime(null);
+						}
 					}
 				} else {
 					e.consume();
