@@ -17,7 +17,7 @@
     </modules>
 
     <properties>
-        <dss.version>4.3.0-SNAPSHOT</dss.version>
+        <dss.version>4.4.RC1</dss.version>
         <beansbinding.version>1.2.1</beansbinding.version>
         <mockito.version>1.9.5</mockito.version>
         <junit.version>4.11</junit.version>
@@ -226,6 +226,10 @@
             <id>java.net</id>
             <name>Maven Repository of java.net</name>
             <url>http://download.java.net/maven/2/</url>
+        </repository>
+        <repository>
+            <id>joinup</id>
+            <url>https://joinup.ec.europa.eu/nexus/content/repositories/releases</url>
         </repository>
     </repositories>
     <pluginRepositories>
