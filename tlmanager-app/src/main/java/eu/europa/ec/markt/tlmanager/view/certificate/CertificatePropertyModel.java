@@ -19,9 +19,8 @@
  */
 package eu.europa.ec.markt.tlmanager.view.certificate;
 
-import java.security.cert.X509Certificate;
-
 import eu.europa.ec.markt.dss.DSSUtils;
+import eu.europa.ec.markt.dss.validation102853.CertificateToken;
 import eu.europa.ec.markt.tsl.jaxb.tsl.DigitalIdentityListType;
 import eu.europa.ec.markt.tsl.jaxb.tsl.DigitalIdentityType;
 
@@ -32,223 +31,223 @@ import eu.europa.ec.markt.tsl.jaxb.tsl.DigitalIdentityType;
  */
 public class CertificatePropertyModel {
 
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(CertificatePropertyModel.class);
+	private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(CertificatePropertyModel.class);
 
-    private SDIWrapper wrapper;
-    private String subjectName;
-    private boolean sn, ski, cert;
-    private boolean skiAvailable;
+	private SDIWrapper wrapper;
+	private String subjectName;
+	private boolean sn, ski, cert;
+	private boolean skiAvailable;
 
-    // service sdi values
-    private DigitalIdentityType certS = null;
-    private DigitalIdentityType skiS = null;
-    private DigitalIdentityType snS = null;
+	// service sdi values
+	private DigitalIdentityType certS = null;
+	private DigitalIdentityType skiS = null;
+	private DigitalIdentityType snS = null;
 
-    /**
-     * The default constructor for CertificatePropertyModel.
-     */
-    public CertificatePropertyModel(SDIWrapper wrapper) {
-        this.wrapper = wrapper;
+	/**
+	 * The default constructor for CertificatePropertyModel.
+	 */
+	public CertificatePropertyModel(SDIWrapper wrapper) {
+		this.wrapper = wrapper;
 
-        // extract values from service sdi - only the certificate is of importance !
-        DigitalIdentityListType sdiService = wrapper.getSdiService();
-        for (DigitalIdentityType did : sdiService.getDigitalId()) {
-            if (did.getX509Certificate() != null) {
-                certS = did;
-                break;
-            }
-        }
+		// extract values from service sdi - only the certificate is of importance !
+		DigitalIdentityListType sdiService = wrapper.getSdiService();
+		for (DigitalIdentityType did : sdiService.getDigitalId()) {
+			if (did.getX509Certificate() != null) {
+				certS = did;
+				break;
+			}
+		}
 
-        try {
+		try {
 
-            final X509Certificate certificate = DSSUtils.loadCertificate(certS.getX509Certificate());
-            subjectName  = DSSUtils.getSubjectX500PrincipalName(certificate);
-            snS = new DigitalIdentityType();
-            snS.setX509SubjectName(subjectName);
+			final CertificateToken certificate = DSSUtils.loadCertificate(certS.getX509Certificate());
+			subjectName  = certificate.getSubjectX500Principal().getName();
+			snS = new DigitalIdentityType();
+			snS.setX509SubjectName(subjectName);
 
-            skiS = new DigitalIdentityType();
-            byte[] skiValue = DSSUtils.getSki(certificate);
-            skiS.setX509SKI(skiValue);
-        } catch (Exception ex) {
-            LOG.warn("Unable to load the certificate! " + ex.getMessage(), ex);
-        }
+			skiS = new DigitalIdentityType();
+			byte[] skiValue = DSSUtils.getSki(certificate.getCertificate());
+			skiS.setX509SKI(skiValue);
+		} catch (Exception ex) {
+			LOG.warn("Unable to load the certificate! " + ex.getMessage(), ex);
+		}
 
-        skiAvailable = (skiS != null && skiS.getX509SKI() != null);  // if there is no skiS -> disable box
+		skiAvailable = ((skiS != null) && (skiS.getX509SKI() != null));  // if there is no skiS -> disable box
 
-        // extract values from history sdi and set controls accordingly
-        // the actual values are not kept from the history sdi and will be overwritten
-        // with the values that are extracted from the certificate of the service
-        DigitalIdentityListType sdiHistory = wrapper.getSdiHistory();
-        boolean nothingSoFar = true;
-        for (DigitalIdentityType did : sdiHistory.getDigitalId()) {
-            if (did != null) {
-                if (did.getX509Certificate() != null) {
-                    cert = true;
-                } else if (did.getX509SKI() != null) {
-                    ski = true;
-                } else if (did.getX509SubjectName() != null) {
-                    sn = true;
-                }
-            }
-        }
-        nothingSoFar = !cert && !ski && !sn;
+		// extract values from history sdi and set controls accordingly
+		// the actual values are not kept from the history sdi and will be overwritten
+		// with the values that are extracted from the certificate of the service
+		DigitalIdentityListType sdiHistory = wrapper.getSdiHistory();
+		boolean nothingSoFar = true;
+		for (DigitalIdentityType did : sdiHistory.getDigitalId()) {
+			if (did != null) {
+				if (did.getX509Certificate() != null) {
+					cert = true;
+				} else if (did.getX509SKI() != null) {
+					ski = true;
+				} else if (did.getX509SubjectName() != null) {
+					sn = true;
+				}
+			}
+		}
+		nothingSoFar = !cert && !ski && !sn;
 
-        if (nothingSoFar) {
-            sn = true;  // set at least the default value: sn
-        }
+		if (nothingSoFar) {
+			sn = true;  // set at least the default value: sn
+		}
 
-        alignSDI();
-    }
+		alignSDI();
+	}
 
-    private void alignSDI() {
-        DigitalIdentityListType sdiHistory = wrapper.getSdiHistory();
-        sdiHistory.getDigitalId().clear();
+	private void alignSDI() {
+		DigitalIdentityListType sdiHistory = wrapper.getSdiHistory();
+		sdiHistory.getDigitalId().clear();
 
-        boolean nothingIsSelected = true;
-        if (sn) {
-            sdiHistory.getDigitalId().add(snS);
-            nothingIsSelected = false;
-        }
-        if (ski) {
-            sdiHistory.getDigitalId().add(skiS);
-            nothingIsSelected = false;
-        }
-        if (cert) {
-            sdiHistory.getDigitalId().add(certS);
-            nothingIsSelected = false;
-        }
+		boolean nothingIsSelected = true;
+		if (sn) {
+			sdiHistory.getDigitalId().add(snS);
+			nothingIsSelected = false;
+		}
+		if (ski) {
+			sdiHistory.getDigitalId().add(skiS);
+			nothingIsSelected = false;
+		}
+		if (cert) {
+			sdiHistory.getDigitalId().add(certS);
+			nothingIsSelected = false;
+		}
 
-        if (nothingIsSelected) {
-            setSn(true);    // enforce default
-        }
-    }
+		if (nothingIsSelected) {
+			setSn(true);    // enforce default
+		}
+	}
 
-    /**
-     * @param wrapper the wrapper to set
-     */
-    public void setWrapper(SDIWrapper wrapper) {
-        this.wrapper = wrapper;
-    }
+	/**
+	 * @param wrapper the wrapper to set
+	 */
+	public void setWrapper(SDIWrapper wrapper) {
+		this.wrapper = wrapper;
+	}
 
-    /**
-     * @param subjectName the subjectName to set
-     */
-    public void setSubjectName(String subjectName) {
-        this.subjectName = subjectName;
-    }
+	/**
+	 * @param subjectName the subjectName to set
+	 */
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
 
-    /**
-     * @param sn the sn to set
-     */
-    public void setSn(boolean sn) {
-        this.sn = sn;
-        alignSDI();
-    }
+	/**
+	 * @param sn the sn to set
+	 */
+	public void setSn(boolean sn) {
+		this.sn = sn;
+		alignSDI();
+	}
 
-    /**
-     * @param ski the ski to set
-     */
-    public void setSki(boolean ski) {
-        this.ski = ski;
-        alignSDI();
-    }
+	/**
+	 * @param ski the ski to set
+	 */
+	public void setSki(boolean ski) {
+		this.ski = ski;
+		alignSDI();
+	}
 
-    /**
-     * @param cert the cert to set
-     */
-    public void setCert(boolean cert) {
-        this.cert = cert;
-        alignSDI();
-    }
+	/**
+	 * @param cert the cert to set
+	 */
+	public void setCert(boolean cert) {
+		this.cert = cert;
+		alignSDI();
+	}
 
-    /**
-     * @return the wrapper
-     */
-    public SDIWrapper getWrapper() {
-        return wrapper;
-    }
+	/**
+	 * @return the wrapper
+	 */
+	public SDIWrapper getWrapper() {
+		return wrapper;
+	}
 
-    /**
-     * @return the subjectName
-     */
-    public String getSubjectName() {
-        return subjectName;
-    }
+	/**
+	 * @return the subjectName
+	 */
+	public String getSubjectName() {
+		return subjectName;
+	}
 
-    /**
-     * @return the sn
-     */
-    public boolean isSn() {
-        return sn;
-    }
+	/**
+	 * @return the sn
+	 */
+	public boolean isSn() {
+		return sn;
+	}
 
-    /**
-     * @return the ski
-     */
-    public boolean isSki() {
-        return ski;
-    }
+	/**
+	 * @return the ski
+	 */
+	public boolean isSki() {
+		return ski;
+	}
 
-    /**
-     * @return the cert
-     */
-    public boolean isCert() {
-        return cert;
-    }
+	/**
+	 * @return the cert
+	 */
+	public boolean isCert() {
+		return cert;
+	}
 
-    /**
-     * @return the skiAvailable
-     */
-    public boolean isSkiAvailable() {
-        return skiAvailable;
-    }
+	/**
+	 * @return the skiAvailable
+	 */
+	public boolean isSkiAvailable() {
+		return skiAvailable;
+	}
 
-    /**
-     * A small helper class for wrapping two <code>ServiceDigitalIdentityListType</code>
-     *
-     * @version $Revision$ - $Date$
-     */
-    public static class SDIWrapper {
-        private DigitalIdentityListType sdiService;
-        private DigitalIdentityListType sdiHistory;
+	/**
+	 * A small helper class for wrapping two <code>ServiceDigitalIdentityListType</code>
+	 *
+	 * @version $Revision$ - $Date$
+	 */
+	public static class SDIWrapper {
+		private DigitalIdentityListType sdiService;
+		private DigitalIdentityListType sdiHistory;
 
-        /**
-         * The default constructor for SDIWrapper.
-         *
-         * @param sdiService the <code>ServiceDigitalIdentityListType</code> of the service
-         * @param sdiHistory the <code>ServiceDigitalIdentityListType</code> of the history
-         */
-        public SDIWrapper(DigitalIdentityListType sdiService, DigitalIdentityListType sdiHistory) {
-            this.sdiService = sdiService;
-            this.sdiHistory = sdiHistory;
-        }
+		/**
+		 * The default constructor for SDIWrapper.
+		 *
+		 * @param sdiService the <code>ServiceDigitalIdentityListType</code> of the service
+		 * @param sdiHistory the <code>ServiceDigitalIdentityListType</code> of the history
+		 */
+		public SDIWrapper(DigitalIdentityListType sdiService, DigitalIdentityListType sdiHistory) {
+			this.sdiService = sdiService;
+			this.sdiHistory = sdiHistory;
+		}
 
-        /**
-         * @return the sdiService
-         */
-        public DigitalIdentityListType getSdiService() {
-            return sdiService;
-        }
+		/**
+		 * @return the sdiService
+		 */
+		public DigitalIdentityListType getSdiService() {
+			return sdiService;
+		}
 
-        /**
-         * @param sdiService the sdiService to set
-         */
-        public void setSdiService(DigitalIdentityListType sdiService) {
-            this.sdiService = sdiService;
-        }
+		/**
+		 * @param sdiService the sdiService to set
+		 */
+		public void setSdiService(DigitalIdentityListType sdiService) {
+			this.sdiService = sdiService;
+		}
 
-        /**
-         * @return the sdiHistory
-         */
-        public DigitalIdentityListType getSdiHistory() {
-            return sdiHistory;
-        }
+		/**
+		 * @return the sdiHistory
+		 */
+		public DigitalIdentityListType getSdiHistory() {
+			return sdiHistory;
+		}
 
-        /**
-         * @param sdiHistory the sdiHistory to set
-         */
-        public void setSdiHistory(DigitalIdentityListType sdiHistory) {
-            this.sdiHistory = sdiHistory;
-        }
-    }
+		/**
+		 * @param sdiHistory the sdiHistory to set
+		 */
+		public void setSdiHistory(DigitalIdentityListType sdiHistory) {
+			this.sdiHistory = sdiHistory;
+		}
+	}
 }

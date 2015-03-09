@@ -20,11 +20,11 @@
 
 package eu.europa.ec.markt.tlmanager.view.multivalue.content;
 
-import java.awt.*;
+import java.awt.Component;
 
+import eu.europa.ec.markt.dss.validation102853.CertificateToken;
 import eu.europa.ec.markt.tlmanager.view.certificate.DigitalIdentityModel;
 import eu.europa.ec.markt.tlmanager.view.panel.DigitalIdentityPanel;
-import java.security.cert.X509Certificate;
 
 /**
  * TODO
@@ -37,59 +37,59 @@ import java.security.cert.X509Certificate;
  */
 public class DigitalIdentityContent extends MultiContent<DigitalIdentityModel> {
 
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(DigitalIdentityContent.class);
+	private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(DigitalIdentityContent.class);
 
-    private final DigitalIdentityPanel panel;
+	private final DigitalIdentityPanel panel;
 
-    public DigitalIdentityContent() {
-        panel = new DigitalIdentityPanel();
-        panel.setName(panel.getClass().getSimpleName());
-    }
+	public DigitalIdentityContent() {
+		panel = new DigitalIdentityPanel();
+		panel.setName(panel.getClass().getSimpleName());
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Component getComponent() {
-        return panel;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Component getComponent() {
+		return panel;
+	}
 
-    @Override
-    protected DigitalIdentityModel retrieveComponentValue(boolean clearOnExit) {
-        DigitalIdentityModel model = panel.getDigitalIdentityModel();
+	@Override
+	protected DigitalIdentityModel retrieveComponentValue(boolean clearOnExit) {
+		DigitalIdentityModel model = panel.getDigitalIdentityModel();
 
-        if (clearOnExit) {
-            panel.clearOnExit();
-        }
-        return model;
-    }
+		if (clearOnExit) {
+			panel.clearOnExit();
+		}
+		return model;
+	}
 
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void updateValue() {
-        LOG.info("Update value for key " + currentKey);
-        DigitalIdentityModel value = getValue(currentKey);
-        LOG.info("... value is " + value);
-        panel.updateCurrentValues(value);
+	/**
+	 * {@inheritDoc}
+	 */
+	 @Override
+	 protected void updateValue() {
+		 LOG.info("Update value for key " + currentKey);
+		 DigitalIdentityModel value = getValue(currentKey);
+		 LOG.info("... value is " + value);
+		 panel.updateCurrentValues(value);
 
-        DigitalIdentityModel model = panel.getDigitalIdentityModel();
-        panel.setHistorical(true);
+		 DigitalIdentityModel model = panel.getDigitalIdentityModel();
+		 panel.setHistorical(true);
 
-        //Check if there is a Certificate defined in Digital ID
-        boolean certificateFound = false;
-        java.util.List<String> listOfCollectionKeys = getKeys();
-        X509Certificate certificate = null;
-        int i = 0;
-        while(!certificateFound && listOfCollectionKeys.size()>i) {
-            DigitalIdentityModel dIvalue = getValue(listOfCollectionKeys.get(i));
-            certificateFound = dIvalue.getCertificate() != null;
-            certificate = dIvalue.getCertificate();
-            i++;
-        }
-        panel.setCertificate(certificate);
-    }
+		 //Check if there is a Certificate defined in Digital ID
+		 boolean certificateFound = false;
+		 java.util.List<String> listOfCollectionKeys = getKeys();
+		 CertificateToken certificate = null;
+		 int i = 0;
+		 while(!certificateFound && (listOfCollectionKeys.size()>i)) {
+			 DigitalIdentityModel dIvalue = getValue(listOfCollectionKeys.get(i));
+			 certificateFound = dIvalue.getCertificate() != null;
+			 certificate = dIvalue.getCertificate();
+			 i++;
+		 }
+		 panel.setCertificate(certificate);
+	 }
 
 }

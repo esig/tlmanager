@@ -23,15 +23,17 @@ package eu.europa.ec.markt.tlmanager.view.panel;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileInputStream;
-import java.security.cert.X509Certificate;
 import java.util.ResourceBundle;
 
-import javax.swing.*;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import eu.europa.ec.markt.dss.DSSUtils;
+import eu.europa.ec.markt.dss.validation102853.CertificateToken;
 import eu.europa.ec.markt.tlmanager.core.Configuration;
 import eu.europa.ec.markt.tlmanager.util.Util;
 import eu.europa.ec.markt.tlmanager.view.certificate.DigitalIdentityModel;
@@ -45,187 +47,187 @@ import eu.europa.ec.markt.tlmanager.view.common.ContentDialogCloser;
 
 public class DigitalIdentitySubjectNamePanel extends JPanel implements ContentDialogCloser {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DigitalIdentityCertificatePanel.class);
-    private static final ResourceBundle uiKeys = ResourceBundle.getBundle("eu/europa/ec/markt/tlmanager/uiKeysComponents", Configuration.getInstance().getLocale());
+	private static final Logger LOG = LoggerFactory.getLogger(DigitalIdentityCertificatePanel.class);
+	private static final ResourceBundle uiKeys = ResourceBundle.getBundle("eu/europa/ec/markt/tlmanager/uiKeysComponents", Configuration.getInstance().getLocale());
 
-    private JFileChooser fileChooser;
-    private DigitalIdentityModel digitalIdentityModel;
-    private X509Certificate certificate;
+	private JFileChooser fileChooser;
+	private DigitalIdentityModel digitalIdentityModel;
+	private CertificateToken certificate;
 
-    /**
-     * The default constructor for DigitalIdentityPanel.
-     */
-    public DigitalIdentitySubjectNamePanel() {
-        this.fileChooser = new JFileChooser();
+	/**
+	 * The default constructor for DigitalIdentityPanel.
+	 */
+	public DigitalIdentitySubjectNamePanel() {
+		this.fileChooser = new JFileChooser();
 
-        initComponents();
+		initComponents();
 
-    }
+	}
 
-    /**
-     * Another constructor for DigitalIdentityPanel.
-     */
-    public DigitalIdentitySubjectNamePanel(JFileChooser fileChooser) {
-        this.fileChooser = fileChooser;
+	/**
+	 * Another constructor for DigitalIdentityPanel.
+	 */
+	public DigitalIdentitySubjectNamePanel(JFileChooser fileChooser) {
+		this.fileChooser = fileChooser;
 
-        initComponents();
+		initComponents();
 
-    }
+	}
 
-    private void loadCertificate(File file) {
+	private void loadCertificate(File file) {
 
-        try {
+		try {
 
-            final FileInputStream inputStream = new FileInputStream(file);
-            final X509Certificate certificate = DSSUtils.loadCertificate(inputStream);
+			final FileInputStream inputStream = new FileInputStream(file);
+			final CertificateToken certificate = DSSUtils.loadCertificate(inputStream);
 
-            final String subjectX500PrincipalName = DSSUtils.getSubjectX500PrincipalName(certificate);
-            if (DSSUtils.isNotBlank(subjectX500PrincipalName)) {
-                digitalIdentityModel.setSubjectName(subjectX500PrincipalName);
-                refresh();
-            } else {
-                digitalIdentityModel.setSubjectName(null);
-            }
+			final String subjectX500PrincipalName = certificate.getSubjectX500Principal().getName();
+			if (DSSUtils.isNotBlank(subjectX500PrincipalName)) {
+				digitalIdentityModel.setSubjectName(subjectX500PrincipalName);
+				refresh();
+			} else {
+				digitalIdentityModel.setSubjectName(null);
+			}
 
-        } catch (Exception ex) {
-            String message = uiKeys.getString("DigitalIdentityPanel.error.message");
-            JOptionPane.showMessageDialog(this, message, uiKeys.getString("DigitalIdentityPanel.error.title"), JOptionPane.INFORMATION_MESSAGE);
-            LOG.warn(message + " " + ex.getMessage(), ex);
-        }
-    }
+		} catch (Exception ex) {
+			String message = uiKeys.getString("DigitalIdentityPanel.error.message");
+			JOptionPane.showMessageDialog(this, message, uiKeys.getString("DigitalIdentityPanel.error.title"), JOptionPane.INFORMATION_MESSAGE);
+			LOG.warn(message + " " + ex.getMessage(), ex);
+		}
+	}
 
-    /**
-     *
-     */
-    public void refresh() {
-        // clean data
-        subject.setText("");
-        
-        String subjectName = null;
-        if (digitalIdentityModel != null) {
-            subjectName = digitalIdentityModel.getSubjectName();
-        }
+	/**
+	 *
+	 */
+	public void refresh() {
+		// clean data
+		subject.setText("");
 
-        if(subjectName==null && certificate != null){
-            subjectName = DSSUtils.getSubjectX500PrincipalName(certificate);
-        }
-        
-        if (subjectName != null) {
-            subject.setText(subjectName);
-        }
-    }
+		String subjectName = null;
+		if (digitalIdentityModel != null) {
+			subjectName = digitalIdentityModel.getSubjectName();
+		}
 
-    /**
-     * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The
-     * content of this method is always regenerated by the Form Editor.
-     */
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+		if((subjectName==null) && (certificate != null)){
+			subjectName = certificate.getSubjectX500Principal().getName();
+		}
 
-        subjectScrollPane = new javax.swing.JScrollPane();
-        subject = new javax.swing.JTextArea();
-        subjectLabel = new javax.swing.JLabel();
+		if (subjectName != null) {
+			subject.setText(subjectName);
+		}
+	}
 
-        setName("DigitalIdentityPanel"); // NOI18N
+	/**
+	 * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The
+	 * content of this method is always regenerated by the Form Editor.
+	 */
+	@SuppressWarnings("unchecked")
+	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+	private void initComponents() {
 
-        subject.setColumns(5);
-        subject.setLineWrap(true);
-        subject.setRows(3);
-        subject.setWrapStyleWord(true);
-        subjectScrollPane.setViewportView(subject);
+		subjectScrollPane = new javax.swing.JScrollPane();
+		subject = new javax.swing.JTextArea();
+		subjectLabel = new javax.swing.JLabel();
 
-        subjectLabel.setText(uiKeys.getString("DigitalIdentityPanel.subject")); // NOI18N
+		setName("DigitalIdentityPanel"); // NOI18N
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(subjectLabel)
-                .addGap(42, 42, 42)
-                .addComponent(subjectScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(subjectLabel)
-                    .addComponent(subjectScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-    }// </editor-fold>//GEN-END:initComponents
+		subject.setColumns(5);
+		subject.setLineWrap(true);
+		subject.setRows(3);
+		subject.setWrapStyleWord(true);
+		subjectScrollPane.setViewportView(subject);
 
-    private void selectCertificateActionPerformed(ActionEvent evt) {// GEN-FIRST:event_selectCertificateActionPerformed
-        int returnValue = fileChooser.showOpenDialog(getRootPane());
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            loadCertificate(selectedFile);
-        }
-    }// GEN-LAST:event_selectCertificateActionPerformed
+		subjectLabel.setText(uiKeys.getString("DigitalIdentityPanel.subject")); // NOI18N
 
-    private void closeButtonActionPerformed(ActionEvent evt) {// GEN-FIRST:event_closeButtonActionPerformed
-        boolean closed = Util.closeDialog(evt);
-        if (closed) {
-            dialogWasClosed();
-        }
-    }// GEN-LAST:event_closeButtonActionPerformed
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+		this.setLayout(layout);
+		layout.setHorizontalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(subjectLabel)
+						.addGap(42, 42, 42)
+						.addComponent(subjectScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+						.addContainerGap())
+				);
+		layout.setVerticalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addComponent(subjectLabel)
+								.addComponent(subjectScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE))
+								.addContainerGap())
+				);
+	}// </editor-fold>//GEN-END:initComponents
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea subject;
-    private javax.swing.JLabel subjectLabel;
-    private javax.swing.JScrollPane subjectScrollPane;
-    // End of variables declaration//GEN-END:variables
-    /*
-     * (non-Javadoc)
-     * 
-     * @see eu.europa.ec.markt.tlmanager.view.common.ContentDialogCloser#dialogWasClosed()
-     */
+	private void selectCertificateActionPerformed(ActionEvent evt) {// GEN-FIRST:event_selectCertificateActionPerformed
+		int returnValue = fileChooser.showOpenDialog(getRootPane());
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			File selectedFile = fileChooser.getSelectedFile();
+			loadCertificate(selectedFile);
+		}
+	}// GEN-LAST:event_selectCertificateActionPerformed
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void dialogWasClosed() {
-        digitalIdentityModel.updateDigitalIdentity();
-    }
+	private void closeButtonActionPerformed(ActionEvent evt) {// GEN-FIRST:event_closeButtonActionPerformed
+		boolean closed = Util.closeDialog(evt);
+		if (closed) {
+			dialogWasClosed();
+		}
+	}// GEN-LAST:event_closeButtonActionPerformed
 
-    /**
-     * @return the digitalIdentityModel
-     */
-    public DigitalIdentityModel getDigitalIdentityModel() {
-        return digitalIdentityModel;
-    }
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JTextArea subject;
+	private javax.swing.JLabel subjectLabel;
+	private javax.swing.JScrollPane subjectScrollPane;
+	// End of variables declaration//GEN-END:variables
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see eu.europa.ec.markt.tlmanager.view.common.ContentDialogCloser#dialogWasClosed()
+	 */
 
-    /**
-     * Sets the certificate model. Used by Binding !
-     *
-     * @param digitalIdentityModel the new certificate model
-     */
-    public void setDigitalIdentityModel(DigitalIdentityModel digitalIdentityModel) {
-        this.digitalIdentityModel = digitalIdentityModel;
-        refresh();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void dialogWasClosed() {
+		digitalIdentityModel.updateDigitalIdentity();
+	}
 
-    /**
-     * Provides the current content information.
-     *
-     * @return the content information
-     */
-    public String retrieveContentInformation() {
-        String info = null;
-        final String subjectText = subject.getText();
-        if (DSSUtils.isNotBlank(subjectText)) {
-            info = subjectText;
-        }
-        return info;
-    }
+	/**
+	 * @return the digitalIdentityModel
+	 */
+	public DigitalIdentityModel getDigitalIdentityModel() {
+		return digitalIdentityModel;
+	}
 
-    void setCertificate(X509Certificate certificate) {
-        this.certificate = certificate;
-    }
+	/**
+	 * Sets the certificate model. Used by Binding !
+	 *
+	 * @param digitalIdentityModel the new certificate model
+	 */
+	public void setDigitalIdentityModel(DigitalIdentityModel digitalIdentityModel) {
+		this.digitalIdentityModel = digitalIdentityModel;
+		refresh();
+	}
+
+	/**
+	 * Provides the current content information.
+	 *
+	 * @return the content information
+	 */
+	public String retrieveContentInformation() {
+		String info = null;
+		final String subjectText = subject.getText();
+		if (DSSUtils.isNotBlank(subjectText)) {
+			info = subjectText;
+		}
+		return info;
+	}
+
+	void setCertificate(CertificateToken certificate) {
+		this.certificate = certificate;
+	}
 
 }

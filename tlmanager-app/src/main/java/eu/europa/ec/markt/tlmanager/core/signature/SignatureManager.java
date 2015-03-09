@@ -26,7 +26,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.security.cert.Certificate;
-import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +63,7 @@ import eu.europa.ec.markt.dss.signature.token.Pkcs11SignatureToken;
 import eu.europa.ec.markt.dss.signature.token.Pkcs12SignatureToken;
 import eu.europa.ec.markt.dss.signature.token.SignatureTokenConnection;
 import eu.europa.ec.markt.dss.signature.xades.XAdESService;
+import eu.europa.ec.markt.dss.validation102853.CertificateToken;
 import eu.europa.ec.markt.dss.validation102853.CertificateVerifier;
 import eu.europa.ec.markt.dss.validation102853.CommonCertificateVerifier;
 import eu.europa.ec.markt.tlmanager.core.Configuration;
@@ -170,7 +170,7 @@ public class SignatureManager {
 		if (provider == null) {
 			return;
 		}
-		if (signatureTokenConnection == null || !provider.equals(lastProvider)) { // provider was changed in ui
+		if ((signatureTokenConnection == null) || !provider.equals(lastProvider)) { // provider was changed in ui
 			initializeTokenCon();
 		}
 		try {
@@ -225,7 +225,7 @@ public class SignatureManager {
 	public File getPkcs11Library() {
 		if (pkcs11Library == null) {
 			String path = userPreferencesDAO.getPKCS11LibraryPath();
-			if (path != null && !path.isEmpty()) {
+			if ((path != null) && !path.isEmpty()) {
 				pkcs11Library = new File(path);
 			}
 		}
@@ -252,7 +252,7 @@ public class SignatureManager {
 	public File getPkcs12File() {
 		if (pkcs12File == null) {
 			String path = userPreferencesDAO.getPKCS12FilePath();
-			if (path != null && !path.isEmpty()) {
+			if ((path != null) && !path.isEmpty()) {
 				pkcs12File = new File(path);
 			}
 		}
@@ -317,8 +317,8 @@ public class SignatureManager {
 		 * <b>The ds:keyInfo shall not contain any associated certificate chain.</b>
 		 */
 		parameters.clearCertificateChain();
-		final X509Certificate signingCertificate = parameters.getSigningCertificate();
-		parameters.setSigningCertificate(signingCertificate);
+		final CertificateToken certificateToken = parameters.getSigningCertificate();
+		parameters.setSigningCertificate(certificateToken);
 		parameters.setSignatureLevel(signatureLevel);
 		parameters.setSignaturePackaging(signaturePackaging);
 
@@ -361,11 +361,11 @@ public class SignatureManager {
 	 *
 	 * @return a list of certificates
 	 */
-	public List<Certificate> getCertificates() {
-		if (keys == null || !provider.equals(lastProvider)) {
+	public List<CertificateToken> getCertificates() {
+		if ((keys == null) || !provider.equals(lastProvider)) {
 			retrieveCertificates();
 		}
-		List<Certificate> certificates = new ArrayList<Certificate>();
+		List<CertificateToken> certificates = new ArrayList<CertificateToken>();
 		for (DSSPrivateKeyEntry key : keys) {
 			certificates.add(key.getCertificate());
 		}
@@ -374,7 +374,7 @@ public class SignatureManager {
 	}
 
 	private DSSPrivateKeyEntry determineCurrentPK() {
-		if (keys == null || selectedCertificate == null) {
+		if ((keys == null) || (selectedCertificate == null)) {
 			return null;
 		}
 		for (DSSPrivateKeyEntry key : keys) {
@@ -458,7 +458,7 @@ public class SignatureManager {
 	 * @return true, if any source is set
 	 */
 	public boolean isAnySource() {
-		return pkcs11Library != null || pkcs12File != null;
+		return (pkcs11Library != null) || (pkcs12File != null);
 	}
 
 	/**

@@ -20,11 +20,10 @@
 
 package eu.europa.ec.markt.tlmanager.view.certificate;
 
-import java.security.cert.CertificateEncodingException;
-import java.security.cert.X509Certificate;
 import java.util.Arrays;
 
 import eu.europa.ec.markt.dss.DSSUtils;
+import eu.europa.ec.markt.dss.validation102853.CertificateToken;
 import eu.europa.ec.markt.tsl.jaxb.tsl.DigitalIdentityType;
 
 /**
@@ -38,88 +37,84 @@ import eu.europa.ec.markt.tsl.jaxb.tsl.DigitalIdentityType;
  */
 public class DigitalIdentityModel {
 
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(DigitalIdentityModel.class);
+	private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(DigitalIdentityModel.class);
 
-    private DigitalIdentityType digitalIdentity;
-    private boolean isHistorical;
-    
-    public boolean isHistorical() {
-        return isHistorical;
-    }
+	private DigitalIdentityType digitalIdentity;
+	private boolean isHistorical;
 
-    public DigitalIdentityModel() {
-        digitalIdentity = new DigitalIdentityType();
-        isHistorical = false;
-    }
+	public boolean isHistorical() {
+		return isHistorical;
+	}
 
-    public DigitalIdentityModel(DigitalIdentityType digitalIdentity) {
-        this.digitalIdentity = digitalIdentity;
-        isHistorical = false;
-    }
-    
-    public DigitalIdentityModel(DigitalIdentityType digitalIdentity, boolean isHistoric) {
-        this.digitalIdentity = digitalIdentity;
-        this.isHistorical = isHistoric;
-    }
+	public DigitalIdentityModel() {
+		digitalIdentity = new DigitalIdentityType();
+		isHistorical = false;
+	}
 
-    public X509Certificate getCertificate() {
-        if (digitalIdentity.getX509Certificate() != null) {
-            return DSSUtils.loadCertificate(digitalIdentity.getX509Certificate());
-        } else {
-            return null;
-        }
-    }
+	public DigitalIdentityModel(DigitalIdentityType digitalIdentity) {
+		this.digitalIdentity = digitalIdentity;
+		isHistorical = false;
+	}
 
-    public void setCertificate(X509Certificate certificate) {
-        digitalIdentity.setX509SKI(null);
-        digitalIdentity.setX509SubjectName(null);
-        
-        try {
-            if (certificate != null) {
-                digitalIdentity.setX509Certificate(certificate.getEncoded());
-            } else {
-                digitalIdentity.setX509Certificate(null);
-            }
-        } catch (CertificateEncodingException e) {
-            throw new RuntimeException(e);
-        }
-    }
+	public DigitalIdentityModel(DigitalIdentityType digitalIdentity, boolean isHistoric) {
+		this.digitalIdentity = digitalIdentity;
+		this.isHistorical = isHistoric;
+	}
 
-    public byte[] getSKI() {
-        return digitalIdentity.getX509SKI();
-    }
+	public CertificateToken getCertificate() {
+		if (digitalIdentity.getX509Certificate() != null) {
+			return DSSUtils.loadCertificate(digitalIdentity.getX509Certificate());
+		} else {
+			return null;
+		}
+	}
 
-    public void setSKI(byte[] ski) {
-        digitalIdentity.setX509SKI(ski);
-        digitalIdentity.setX509SubjectName(null);
-        digitalIdentity.setX509Certificate(null);
-    }
+	public void setCertificate(CertificateToken certificate) {
+		digitalIdentity.setX509SKI(null);
+		digitalIdentity.setX509SubjectName(null);
 
-    public String getSubjectName() {
-        return digitalIdentity.getX509SubjectName();
-    }
+		if (certificate != null) {
+			digitalIdentity.setX509Certificate(certificate.getEncoded());
+		} else {
+			digitalIdentity.setX509Certificate(null);
+		}
+	}
 
-    public void setSubjectName(String subjectName) {
-        digitalIdentity.setX509SubjectName(subjectName);
-        digitalIdentity.setX509SKI(null);
-        digitalIdentity.setX509Certificate(null);
-    }
+	public byte[] getSKI() {
+		return digitalIdentity.getX509SKI();
+	}
 
-    public void updateDigitalIdentity() {
-        LOG.info("updateDigitalIdentity");
+	public void setSKI(byte[] ski) {
+		digitalIdentity.setX509SKI(ski);
+		digitalIdentity.setX509SubjectName(null);
+		digitalIdentity.setX509Certificate(null);
+	}
 
-    }
+	public String getSubjectName() {
+		return digitalIdentity.getX509SubjectName();
+	}
 
-    public DigitalIdentityType getDigitalIdentity() {
-        return digitalIdentity;
-    }
+	public void setSubjectName(String subjectName) {
+		digitalIdentity.setX509SubjectName(subjectName);
+		digitalIdentity.setX509SKI(null);
+		digitalIdentity.setX509Certificate(null);
+	}
 
-    @Override
-    public String toString() {
-        return "DigitalIdentityType{" +
-              "x509Certificate=" + Arrays.toString(digitalIdentity.getX509Certificate()) +
-              ", x509SubjectName='" + digitalIdentity.getX509SubjectName() + '\'' +
-              ", x509SKI=" + Arrays.toString(digitalIdentity.getX509SKI()) +
-              '}';
-    }
+	public void updateDigitalIdentity() {
+		LOG.info("updateDigitalIdentity");
+
+	}
+
+	public DigitalIdentityType getDigitalIdentity() {
+		return digitalIdentity;
+	}
+
+	@Override
+	public String toString() {
+		return "DigitalIdentityType{" +
+				"x509Certificate=" + Arrays.toString(digitalIdentity.getX509Certificate()) +
+				", x509SubjectName='" + digitalIdentity.getX509SubjectName() + '\'' +
+				", x509SKI=" + Arrays.toString(digitalIdentity.getX509SKI()) +
+				'}';
+	}
 }
