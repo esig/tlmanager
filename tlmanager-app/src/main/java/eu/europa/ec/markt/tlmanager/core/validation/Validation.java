@@ -366,7 +366,10 @@ public class Validation {
 		for (DigitalIdentityType digitalIdentity : sdiList.getDigitalId()) {
 
 			if (digitalIdentity.getX509Certificate() == null) {
-				continue;
+				if (digitalIdentity.getX509SubjectName() == null){
+					continue;
+				}
+				return;
 			}
 			try {
 
@@ -406,7 +409,6 @@ public class Validation {
 			}
 		}
 		if (x509Certificate == null) {
-
 			final String message = logger.getEmptyMessage(nodeName.toString(), serviceDigitalIdentitiesQName);
 			LOG.debug(message);
 			logger.error(message, parent);

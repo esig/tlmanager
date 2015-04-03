@@ -300,7 +300,6 @@ public class SignatureManager {
 
 		final SignatureParameters parameters = new SignatureParameters();
 		parameters.setDigestAlgorithm(digestAlgorithm);
-
 		parameters.setPrivateKeyEntry(pk);
 		/**
 		 * 5.7 Signature
@@ -378,7 +377,7 @@ public class SignatureManager {
 			return null;
 		}
 		for (DSSPrivateKeyEntry key : keys) {
-			if (selectedCertificate.equals(key.getCertificate())) {
+			if (selectedCertificate.equals(key.getCertificate().getCertificate())) {
 				return key;
 			}
 		}

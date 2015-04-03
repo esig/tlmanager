@@ -24,8 +24,6 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.security.cert.Certificate;
-import java.security.cert.X509Certificate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -40,7 +38,6 @@ import javax.swing.event.ListSelectionListener;
 
 import org.jdesktop.swingx.combobox.ListComboBoxModel;
 
-import eu.europa.ec.markt.dss.DSSUtils;
 import eu.europa.ec.markt.dss.DigestAlgorithm;
 import eu.europa.ec.markt.dss.validation102853.CertificateToken;
 import eu.europa.ec.markt.tlmanager.core.Configuration;
@@ -84,7 +81,8 @@ public class SignatureStep3 extends javax.swing.JPanel {
 		certificates.setCellRenderer(new DefaultListCellRenderer() {
 			@Override
 			public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-				String label = DSSUtils.getSubjectX500PrincipalName((X509Certificate) value);
+				//String label = DSSUtils.getSubjectX500PrincipalName((X509Certificate) value);
+				String label = ((CertificateToken) value).getSubjectX500Principal().getName();
 
 				return super.getListCellRendererComponent(list, label, index, isSelected, cellHasFocus);
 			}
@@ -94,7 +92,8 @@ public class SignatureStep3 extends javax.swing.JPanel {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting()) {
-					wizard.setSelectedCertificate((Certificate) certificates.getSelectedValue());
+					//wizard.setSelectedCertificate((Certificate) certificates.getSelectedValue());
+					wizard.setSelectedCertificate(((CertificateToken) certificates.getSelectedValue()).getCertificate());
 				}
 			}
 		});

@@ -184,19 +184,19 @@
 	        <!--<version>1.0.13</version>-->
         <!--</dependency>-->
 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>junit</groupId> -->
+<!--             <artifactId>junit</artifactId> -->
+<!--             <version>${junit.version}</version> -->
+<!--             <scope>test</scope> -->
+<!--         </dependency> -->
 
-        <dependency>
-            <groupId>org.easytesting</groupId>
-            <artifactId>fest-swing-junit</artifactId>
-            <version>${fest.version}</version>
-            <scope>test</scope>
-        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>org.easytesting</groupId> -->
+<!--             <artifactId>fest-swing-junit</artifactId> -->
+<!--             <version>${fest.version}</version> -->
+<!--             <scope>test</scope> -->
+<!--         </dependency> -->
 
         <dependency>
             <groupId>org.mockito</groupId>
