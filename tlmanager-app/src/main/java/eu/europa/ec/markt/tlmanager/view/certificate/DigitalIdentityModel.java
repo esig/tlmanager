@@ -24,6 +24,7 @@ import java.util.Arrays;
 
 import eu.europa.ec.markt.dss.DSSUtils;
 import eu.europa.ec.markt.dss.validation102853.CertificateToken;
+import eu.europa.ec.markt.tsl.jaxb.tsl.AnyType;
 import eu.europa.ec.markt.tsl.jaxb.tsl.DigitalIdentityType;
 
 /**
@@ -72,6 +73,7 @@ public class DigitalIdentityModel {
 	public void setCertificate(CertificateToken certificate) {
 		digitalIdentity.setX509SKI(null);
 		digitalIdentity.setX509SubjectName(null);
+		digitalIdentity.setOther(null);
 
 		if (certificate != null) {
 			digitalIdentity.setX509Certificate(certificate.getEncoded());
@@ -84,10 +86,22 @@ public class DigitalIdentityModel {
 		return digitalIdentity.getX509SKI();
 	}
 
+	public AnyType getOTHER() {
+		return digitalIdentity.getOther();
+	}
+
+	public void setOTHER(AnyType other) {
+		digitalIdentity.setOther(other);
+		digitalIdentity.setX509SKI(null);
+		digitalIdentity.setX509SubjectName(null);
+		digitalIdentity.setX509Certificate(null);
+	}
+
 	public void setSKI(byte[] ski) {
 		digitalIdentity.setX509SKI(ski);
 		digitalIdentity.setX509SubjectName(null);
 		digitalIdentity.setX509Certificate(null);
+		digitalIdentity.setOther(null);
 	}
 
 	public String getSubjectName() {
@@ -95,6 +109,7 @@ public class DigitalIdentityModel {
 	}
 
 	public void setSubjectName(String subjectName) {
+		digitalIdentity.setOther(null);
 		digitalIdentity.setX509SubjectName(subjectName);
 		digitalIdentity.setX509SKI(null);
 		digitalIdentity.setX509Certificate(null);

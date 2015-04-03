@@ -52,10 +52,11 @@ public class DigitalIdentityPanel extends javax.swing.JPanel {
 		digitalIdentityCertificatePanel = new eu.europa.ec.markt.tlmanager.view.panel.DigitalIdentityCertificatePanel();
 		digitalIdentitySubjectNamePanel = new eu.europa.ec.markt.tlmanager.view.panel.DigitalIdentitySubjectNamePanel();
 		digitalIdentitySKIPanel = new eu.europa.ec.markt.tlmanager.view.panel.DigitalIdentitySKIPanel();
+		digitalIdentityOtherPanel = new eu.europa.ec.markt.tlmanager.view.panel.DigitalIdentityOtherPanel();
 
 		org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(DigitalIdentityPanel.class, "DigitalIdentityPanel.jLabel1.text")); // NOI18N
 
-		digitalIdentityComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Certificate", "Subject Name", "Subject Key Identifier" }));
+		digitalIdentityComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Certificate", "Subject Name", "Subject Key Identifier","Other" }));
 		digitalIdentityComboBox.addItemListener(new java.awt.event.ItemListener() {
 			@Override
 			public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -71,6 +72,8 @@ public class DigitalIdentityPanel extends javax.swing.JPanel {
 						.addContainerGap()
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addGroup(layout.createSequentialGroup()
+										.addComponent(digitalIdentityOtherPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(digitalIdentitySKIPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(digitalIdentitySubjectNamePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -96,6 +99,7 @@ public class DigitalIdentityPanel extends javax.swing.JPanel {
 										.addGroup(layout.createSequentialGroup()
 												.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 														.addComponent(digitalIdentitySubjectNamePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addComponent(digitalIdentityOtherPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 														.addComponent(digitalIdentitySKIPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
 														.addGap(0, 0, Short.MAX_VALUE)))
 														.addContainerGap())
@@ -124,6 +128,13 @@ public class DigitalIdentityPanel extends javax.swing.JPanel {
 						digitalIdentityComboBox.setEnabled(false);
 					}
 				}
+			} else if ("Other".equals(selectedItem)) {
+				if(hasCertificat || isHistorical) {
+					showOther();
+					if((digitalIdentityModel != null) && (digitalIdentityModel.getSKI() != null) && !digitalIdentityModel.getSKI().equals("")){
+						digitalIdentityComboBox.setEnabled(false);
+					}
+				}
 			}
 		} else {
 			digitalIdentityModel.setCertificate(null);
@@ -138,6 +149,7 @@ public class DigitalIdentityPanel extends javax.swing.JPanel {
 	private javax.swing.JComboBox digitalIdentityComboBox;
 	private eu.europa.ec.markt.tlmanager.view.panel.DigitalIdentitySKIPanel digitalIdentitySKIPanel;
 	private eu.europa.ec.markt.tlmanager.view.panel.DigitalIdentitySubjectNamePanel digitalIdentitySubjectNamePanel;
+	private eu.europa.ec.markt.tlmanager.view.panel.DigitalIdentityOtherPanel digitalIdentityOtherPanel;
 	private javax.swing.JLabel jLabel1;
 	// End of variables declaration//GEN-END:variables
 
@@ -156,6 +168,8 @@ public class DigitalIdentityPanel extends javax.swing.JPanel {
 				digitalIdentityModel.setSubjectName(digitalIdentitySubjectNamePanel.retrieveContentInformation());
 			} else if ("Subject Key Identifier".equals(selectedItem)) {
 				digitalIdentityModel.setSKI(digitalIdentitySKIPanel.retrieveContentInformation());
+			} else if ("Other".equals(selectedItem)){
+				digitalIdentityModel.setOTHER(digitalIdentityOtherPanel.retrieveContentInformation());
 			}
 		} else {
 			return new DigitalIdentityModel();
@@ -176,6 +190,8 @@ public class DigitalIdentityPanel extends javax.swing.JPanel {
 				digitalIdentityComboBox.setSelectedItem("Subject Name");
 			} else if (digitalIdentityModel.getSKI() != null) {
 				digitalIdentityComboBox.setSelectedItem("Subject Key Identifier");
+			} else if (digitalIdentityModel.getOTHER() != null) {
+				digitalIdentityComboBox.setSelectedItem("Other");
 			} else {
 				digitalIdentityComboBox.setSelectedItem(null);
 			}
@@ -192,6 +208,9 @@ public class DigitalIdentityPanel extends javax.swing.JPanel {
 
 		digitalIdentitySKIPanel.setVisible(false);
 		digitalIdentitySKIPanel.setDigitalIdentityModel(null);
+
+		digitalIdentityOtherPanel.setVisible(false);
+		digitalIdentityOtherPanel.setDigitalIdentityModel(null);
 	}
 
 	private void showSki() {
@@ -204,7 +223,29 @@ public class DigitalIdentityPanel extends javax.swing.JPanel {
 		digitalIdentitySKIPanel.setVisible(true);
 		digitalIdentitySKIPanel.setCertificate(getCertificate());
 		digitalIdentitySKIPanel.setDigitalIdentityModel(digitalIdentityModel);
+
+		digitalIdentityOtherPanel.setVisible(false);
+		digitalIdentityOtherPanel.setDigitalIdentityModel(null);
 	}
+
+
+	private void showOther() {
+
+		digitalIdentityCertificatePanel.setVisible(false);
+		digitalIdentityCertificatePanel.setDigitalIdentityModel(null);
+
+		digitalIdentityOtherPanel.setVisible(true);
+		digitalIdentityOtherPanel.setCertificate(getCertificate());
+		digitalIdentityOtherPanel.setDigitalIdentityModel(digitalIdentityModel);
+
+
+		digitalIdentitySKIPanel.setVisible(false);
+		digitalIdentitySKIPanel.setDigitalIdentityModel(null);
+
+		digitalIdentitySubjectNamePanel.setVisible(false);
+		digitalIdentitySubjectNamePanel.setDigitalIdentityModel(null);
+	}
+
 
 	private void showSubjectName() {
 		digitalIdentityCertificatePanel.setVisible(false);
@@ -217,6 +258,9 @@ public class DigitalIdentityPanel extends javax.swing.JPanel {
 
 		digitalIdentitySKIPanel.setVisible(false);
 		digitalIdentitySKIPanel.setDigitalIdentityModel(null);
+
+		digitalIdentityOtherPanel.setVisible(false);
+		digitalIdentityOtherPanel.setDigitalIdentityModel(null);
 	}
 
 	private void showCertificate() {
@@ -228,6 +272,9 @@ public class DigitalIdentityPanel extends javax.swing.JPanel {
 
 		digitalIdentitySKIPanel.setVisible(false);
 		digitalIdentitySKIPanel.setDigitalIdentityModel(null);
+
+		digitalIdentityOtherPanel.setVisible(false);
+		digitalIdentityOtherPanel.setDigitalIdentityModel(null);
 	}
 
 	public void clearOnExit() {

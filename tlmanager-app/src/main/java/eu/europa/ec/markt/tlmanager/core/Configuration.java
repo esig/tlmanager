@@ -248,7 +248,7 @@ public class Configuration {
 		Properties custom = new Properties();
 
 		String customProperty = System.getProperty("config");
-		if (customProperty.isEmpty()){
+		if ((customProperty==null) || customProperty.isEmpty()){
 			customProperty = "custom.properties";
 		}
 
