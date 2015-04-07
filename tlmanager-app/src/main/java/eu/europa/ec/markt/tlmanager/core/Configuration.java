@@ -76,12 +76,14 @@ public class Configuration {
 	// Geographic Settings
 	private static final String CODE_LANGUAGES = "tlmanager.codes.languages";
 	private static final String CODE_COUNTRIES = "tlmanager.codes.countries";
+	private static final String CODE_MEMBER_STATES = "tlmanager.codes.member_states";
 
 	private static final String QUALIFIERS = "tlmanager.tsl.tl.qualifiers";
 	private static final String ASSERT_ATTRIBUTES = "tlmanager.tsl.tl.assertattribute";
 	private static final String HISTORICAL_PERIOD = "tlmanager.common.historicalperiod";
 
 	private static CountryCodes countryCodes;
+	private static CountryCodes memberStatesCodes;
 	private static LanguageCodes languageCodes;
 	private static TL tl;
 	private static LOTL lotl;
@@ -229,9 +231,10 @@ public class Configuration {
 	private void initCodes() {
 		String countries = properties.getProperty(CODE_COUNTRIES);
 		String languages = properties.getProperty(CODE_LANGUAGES);
-
+		String memberStates = properties.getProperty(CODE_MEMBER_STATES);
 		countryCodes = new CountryCodes(countries);
 		languageCodes = new LanguageCodes(languages);
+		memberStatesCodes = new CountryCodes(memberStates);
 	}
 
 	private void initTSL() {
@@ -385,6 +388,13 @@ public class Configuration {
 	 */
 	public CountryCodes getCountryCodes() {
 		return countryCodes;
+	}
+
+	/**
+	 * @return list of member states code
+	 */
+	public CountryCodes getMemberStatesCodes() {
+		return memberStatesCodes;
 	}
 
 	/**
@@ -778,7 +788,7 @@ public class Configuration {
 		 * @param countryCode
 		 * @return true if countryCode is contained in codesList
 		 */
-		public boolean isCodeInList(String countryCode) {
+		public boolean isCodeInListOLD(String countryCode) {
 			return getCodesList().contains(countryCode);
 		}
 
