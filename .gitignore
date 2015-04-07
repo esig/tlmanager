@@ -10,3 +10,4 @@ test-output
 .DS_Store
 atlassian-ide-plugin.xml
 
+tlmanager-app/custom.properties
