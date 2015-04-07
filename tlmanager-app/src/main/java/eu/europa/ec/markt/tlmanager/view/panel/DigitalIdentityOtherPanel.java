@@ -21,12 +21,10 @@
 package eu.europa.ec.markt.tlmanager.view.panel;
 
 import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.slf4j.Logger;
@@ -75,46 +73,25 @@ public class DigitalIdentityOtherPanel extends JPanel implements ContentDialogCl
 
 	}
 
-	private void loadCertificate(File file) {
-
-		try {
-
-			final FileInputStream inputStream = new FileInputStream(file);
-			final CertificateToken certificate = DSSUtils.loadCertificate(inputStream);
-
-			final String subjectX500PrincipalName = certificate.getSubjectX500Principal().getName();
-			if (DSSUtils.isNotBlank(subjectX500PrincipalName)) {
-				digitalIdentityModel.setSubjectName(subjectX500PrincipalName);
-				refresh();
-			} else {
-				digitalIdentityModel.setSubjectName(null);
-			}
-
-		} catch (Exception ex) {
-			String message = uiKeys.getString("DigitalIdentityPanel.error.message");
-			JOptionPane.showMessageDialog(this, message, uiKeys.getString("DigitalIdentityPanel.error.title"), JOptionPane.INFORMATION_MESSAGE);
-			LOG.warn(message + " " + ex.getMessage(), ex);
-		}
-	}
-
 	/**
 	 *
 	 */
 	public void refresh() {
 		// clean data
-		subject.setText("");
+		other.setText("");
 
-		String subjectName = null;
+		AnyType otherValue = null;
 		if (digitalIdentityModel != null) {
-			subjectName = digitalIdentityModel.getSubjectName();
+			otherValue = digitalIdentityModel.getOTHER();
 		}
 
-		if((subjectName==null) && (certificate != null)){
-			subjectName = certificate.getSubjectX500Principal().getName();
-		}
-
-		if (subjectName != null) {
-			subject.setText(subjectName);
+		if (otherValue != null) {
+			if (otherValue.getContent()!=null){
+				ArrayList list = new ArrayList(otherValue.getContent());
+				for (int i = 0; i < list.size(); i++) {
+					other.setText(list.get(i).toString());
+				}
+			}
 		}
 	}
 
@@ -126,19 +103,19 @@ public class DigitalIdentityOtherPanel extends JPanel implements ContentDialogCl
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
-		subjectScrollPane = new javax.swing.JScrollPane();
-		subject = new javax.swing.JTextArea();
-		subjectLabel = new javax.swing.JLabel();
+		otherScrollPane = new javax.swing.JScrollPane();
+		other = new javax.swing.JTextArea();
+		otherLabel = new javax.swing.JLabel();
 
 		setName("DigitalIdentityPanel"); // NOI18N
 
-		subject.setColumns(5);
-		subject.setLineWrap(true);
-		subject.setRows(3);
-		subject.setWrapStyleWord(true);
-		subjectScrollPane.setViewportView(subject);
+		other.setColumns(5);
+		other.setLineWrap(true);
+		other.setRows(3);
+		other.setWrapStyleWord(true);
+		otherScrollPane.setViewportView(other);
 
-		subjectLabel.setText(uiKeys.getString("DigitalIdentityPanel.other")); // NOI18N
+		otherLabel.setText(uiKeys.getString("DigitalIdentityPanel.other")); // NOI18N
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
 		this.setLayout(layout);
@@ -146,9 +123,9 @@ public class DigitalIdentityOtherPanel extends JPanel implements ContentDialogCl
 				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
 						.addContainerGap()
-						.addComponent(subjectLabel)
+						.addComponent(otherLabel)
 						.addGap(42, 42, 42)
-						.addComponent(subjectScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+						.addComponent(otherScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
 						.addContainerGap())
 				);
 		layout.setVerticalGroup(
@@ -156,19 +133,12 @@ public class DigitalIdentityOtherPanel extends JPanel implements ContentDialogCl
 				.addGroup(layout.createSequentialGroup()
 						.addContainerGap()
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(subjectLabel)
-								.addComponent(subjectScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE))
+								.addComponent(otherLabel)
+								.addComponent(otherScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE))
 								.addContainerGap())
 				);
 	}// </editor-fold>//GEN-END:initComponents
 
-	private void selectCertificateActionPerformed(ActionEvent evt) {// GEN-FIRST:event_selectCertificateActionPerformed
-		int returnValue = fileChooser.showOpenDialog(getRootPane());
-		if (returnValue == JFileChooser.APPROVE_OPTION) {
-			File selectedFile = fileChooser.getSelectedFile();
-			loadCertificate(selectedFile);
-		}
-	}// GEN-LAST:event_selectCertificateActionPerformed
 
 	private void closeButtonActionPerformed(ActionEvent evt) {// GEN-FIRST:event_closeButtonActionPerformed
 		boolean closed = Util.closeDialog(evt);
@@ -178,9 +148,9 @@ public class DigitalIdentityOtherPanel extends JPanel implements ContentDialogCl
 	}// GEN-LAST:event_closeButtonActionPerformed
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JTextArea subject;
-	private javax.swing.JLabel subjectLabel;
-	private javax.swing.JScrollPane subjectScrollPane;
+	private javax.swing.JTextArea other;
+	private javax.swing.JLabel otherLabel;
+	private javax.swing.JScrollPane otherScrollPane;
 	// End of variables declaration//GEN-END:variables
 	/*
 	 * (non-Javadoc)
@@ -221,9 +191,9 @@ public class DigitalIdentityOtherPanel extends JPanel implements ContentDialogCl
 	public AnyType retrieveContentInformation() {
 		AnyType at = new AnyType();
 
-		final String subjectText = subject.getText();
-		if (DSSUtils.isNotBlank(subjectText)) {
-			at.getContent().add(subjectText);
+		final String otherText = other.getText();
+		if (DSSUtils.isNotBlank(otherText)) {
+			at.getContent().add(otherText);
 			return at;
 		}
 

@@ -109,10 +109,10 @@ public class DigitalIdentityModel {
 	}
 
 	public void setSubjectName(String subjectName) {
-		digitalIdentity.setOther(null);
 		digitalIdentity.setX509SubjectName(subjectName);
 		digitalIdentity.setX509SKI(null);
 		digitalIdentity.setX509Certificate(null);
+		digitalIdentity.setOther(null);
 	}
 
 	public void updateDigitalIdentity() {
@@ -130,6 +130,7 @@ public class DigitalIdentityModel {
 				"x509Certificate=" + Arrays.toString(digitalIdentity.getX509Certificate()) +
 				", x509SubjectName='" + digitalIdentity.getX509SubjectName() + '\'' +
 				", x509SKI=" + Arrays.toString(digitalIdentity.getX509SKI()) +
+				", Other=" + digitalIdentity.getOther() +
 				'}';
 	}
 }

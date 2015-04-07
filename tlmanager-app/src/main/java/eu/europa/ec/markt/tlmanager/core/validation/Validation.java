@@ -366,7 +366,7 @@ public class Validation {
 		for (DigitalIdentityType digitalIdentity : sdiList.getDigitalId()) {
 
 			if (digitalIdentity.getX509Certificate() == null) {
-				if (digitalIdentity.getX509SubjectName() == null){
+				if (digitalIdentity.getOther() == null){
 					continue;
 				}
 				return;

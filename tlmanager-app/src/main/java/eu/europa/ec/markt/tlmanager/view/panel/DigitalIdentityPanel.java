@@ -131,7 +131,7 @@ public class DigitalIdentityPanel extends javax.swing.JPanel {
 			} else if ("Other".equals(selectedItem)) {
 				if(hasCertificat || isHistorical) {
 					showOther();
-					if((digitalIdentityModel != null) && (digitalIdentityModel.getSKI() != null) && !digitalIdentityModel.getSKI().equals("")){
+					if((digitalIdentityModel != null) && (digitalIdentityModel.getOTHER() != null) && !digitalIdentityModel.getOTHER().equals("")){
 						digitalIdentityComboBox.setEnabled(false);
 					}
 				}

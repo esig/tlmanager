@@ -256,7 +256,6 @@ public class Configuration {
 		try {
 			if(customFile.exists()) {
 				LOG.info("Custom file in " + customFile.getAbsolutePath());
-				//InputStream fisc = new FileInputStream(customFile);
 				custom = loadPropertyFile(new FileInputStream(customFile));
 
 			} else {

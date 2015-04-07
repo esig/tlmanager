@@ -213,6 +213,10 @@ public abstract class TreeDataPublisher extends JPanel implements MandatoryLabel
 							DigitalIdentityModel dit = (DigitalIdentityModel) dIvalue;
 							if(!dit.isHistorical()) {
 								noCertificate =(dit.getCertificate() == null);
+								//If no certificate, verify that there's something in "Other"
+								if (noCertificate==true){
+									noCertificate=(dit.getOTHER()==null);
+								}
 								//Certificate is founded, breack the loop
 								if(noCertificate == false){
 									break;
