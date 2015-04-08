@@ -8,13 +8,11 @@
 		<groupId>eu.europa.ec.joinup.sd-dss</groupId>
 		<artifactId>tl-manager</artifactId>
 		<version>4.1.8-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<name>TLManager DSS Package</name>
 	<description>TLManager Application of Project DSS</description>
 	<artifactId>tlmanager-package</artifactId>
-	<packaging>jar</packaging>
 
 	<build>
 		<plugins>
@@ -43,7 +41,7 @@
 		<dependency>
 			<groupId>eu.europa.ec.joinup.sd-dss</groupId>
 			<artifactId>tlmanager-app</artifactId>
-			<version>${project.version}</version>
+			<version>4.1.8-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.oracle</groupId>
