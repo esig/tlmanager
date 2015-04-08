@@ -788,7 +788,7 @@ public class Configuration {
 		 * @param countryCode
 		 * @return true if countryCode is contained in codesList
 		 */
-		public boolean isCodeInListOLD(String countryCode) {
+		public boolean isCodeInList(String countryCode) {
 			return getCodesList().contains(countryCode);
 		}
 

@@ -1094,8 +1094,6 @@ public class Validation {
 		final String tslType = tsl.getSchemeInformation().getTSLType();
 		final String schemeTerritory = tsl.getSchemeInformation().getSchemeTerritory();
 
-
-
 		if (Configuration.getInstance().isEuMode()) {
 			if (!tslType.equals(Configuration.getInstance().getTSL().getTslType())){
 				final String message = name + uiKeys.getString("Validation.rule.tslType.inverse");
@@ -1103,7 +1101,6 @@ public class Validation {
 				logger.error(message, tsl);
 			}
 		} else {
-			// file is EU and application is in EU mode
 			String tslTypePattern = Configuration.getInstance().getTSL().getTslType();
 			String tslTypeExpected = tslTypePattern.replaceAll("#CC#", schemeTerritory);
 			if (!tslType.equals(tslTypeExpected)){
@@ -1112,17 +1109,6 @@ public class Validation {
 				logger.error(message, tsl);
 			}
 		}
-
-
-
-		//		if (Configuration.getInstance().getCountryCodes().isCodeInList(schemeTerritory)) {
-		//			// eu country, TSL Type value is fixed
-		//			if (!tslType.equals(Configuration.getInstance().getTSL().getTslType())) {
-		//				final String message = name + uiKeys.getString("Validation.rule.tslType.inverse");
-		//				LOG.error(message);
-		//				logger.error(message, tsl);
-		//			}
-		//		}
 	}
 
 	/**
@@ -1140,32 +1126,6 @@ public class Validation {
 		}
 	}
 
-	/**
-	 * Verify that if tsl.schemeInformation.tslType is
-	 * "http://uri.etsi.org/TrstSvc/TrustedList/TSLType/CClist" or "http://uri.etsi.org/TrstSvc/TrustedList/TSLType/CClistofthelists"
-	 * the "CC" value is equals to tsl.schemeInformation.schemeTerritory
-	 */
-	//	void checkRuleSchemaInformationTSLTypeInlineWithSchemeTerritory() {
-	//		String name = QNames._TSLType_QNAME.getLocalPart();
-	//		final String tslType = tsl.getSchemeInformation().getTSLType();
-	//		final String schemeTerritory = tsl.getSchemeInformation().getSchemeTerritory();
-	//		if (!Configuration.getInstance().getCountryCodes().isCodeInList(schemeTerritory)) {
-	//			final String tslTypeNonEu = Configuration.getInstance().getTSL().getTslType();
-	//			String regExp = tslTypeNonEu.replaceAll("(#CC#)", "(.+)");
-	//			final Pattern pattern = Pattern.compile(regExp);
-	//			final Matcher matcher = pattern.matcher(tslType);
-	//			if (matcher.matches()) {
-	//				final String countryInTslType = matcher.group(1);
-	//				if (!countryInTslType.equals(schemeTerritory)) {
-	//					final String message = name + uiKeys.getString("Validation.rule.tslType.country.matcherror");
-	//					LOG.error(message);
-	//					logger.error(message, tsl);
-	//				}
-	//			}
-	//		} else {
-	//			// checked in checkRuleSchemaInformationTSLType
-	//		}
-	//	}
 
 	/**
 	 * If the scheme type is "generic/list", the TSLType of the pointer to other TSL must be "listofthelists". And vice
@@ -1174,8 +1134,6 @@ public class Validation {
 	void checkRuleTSLType() {
 		String name = QNames._TSLType_QNAME.getLocalPart();
 
-		final String schemeTerritory = tsl.getSchemeInformation().getSchemeTerritory();
-		//if (Configuration.getInstance().getCountryCodes().isCodeInList(schemeTerritory)) {
 		if (Configuration.getInstance().isEuMode()) {
 			String tslTypeInverseEu = Configuration.getInstance().getTSL().getTslTypeInverse();
 			if (pointers != null) {
@@ -1249,7 +1207,6 @@ public class Validation {
 					}
 				}
 
-				//if (!Configuration.getInstance().getCountryCodes().isCodeInList(territory)) {
 				if (!Configuration.getInstance().isEuMode()) {
 					final String tslTypeInverseNonEu = Configuration.getInstance().getTSL().getTslTypeInverse();
 					String regExp = tslTypeInverseNonEu.replaceAll("(#CC#)", "(.+)");
@@ -1301,9 +1258,7 @@ public class Validation {
 					}
 				}
 
-				//if (Configuration.getInstance().getCountryCodes().isCodeInList(territory)) {
 				if (Configuration.getInstance().isEuMode()) {
-					// eu country
 					boolean isLotlTslType = tslType.equals(Configuration.getInstance().getLotlTslTypeEu());
 					boolean isTlTslType = tslType.equals(Configuration.getInstance().getTlTslTypeEu());
 
@@ -1464,7 +1419,6 @@ public class Validation {
 		final QName name = QNames._SchemeExtensions_QNAME;
 		final ExtensionsListType schemeExtensions = tsl.getSchemeInformation().getSchemeExtensions();
 		final String schemeTerritory = tsl.getSchemeInformation().getSchemeTerritory();
-		//if (Configuration.getInstance().getCountryCodes().isCodeInList(schemeTerritory)) {
 		if (Configuration.getInstance().isEuMode()) {
 			if ((schemeExtensions != null) && (schemeExtensions.getExtension() != null) && !schemeExtensions.getExtension().isEmpty()) {
 				final String message = name + uiKeys.getString("Validation.rule.schemeInformation.schemeExtensions");
@@ -1924,7 +1878,6 @@ public class Validation {
 	void checkRuleTspServiceCurrentStatus() {
 		final QName name = QNames._ServiceStatus_QNAME;
 		final String schemeTerritory = tsl.getSchemeInformation().getSchemeTerritory();
-		//if (Configuration.getInstance().getCountryCodes().isCodeInList(schemeTerritory)) {
 		if (Configuration.getInstance().isEuMode()) {
 			// In EU
 			if (services != null) {

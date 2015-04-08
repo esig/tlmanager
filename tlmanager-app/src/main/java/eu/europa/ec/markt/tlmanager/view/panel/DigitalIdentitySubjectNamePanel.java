@@ -146,7 +146,7 @@ public class DigitalIdentitySubjectNamePanel extends JPanel implements ContentDi
 				.addGroup(layout.createSequentialGroup()
 						.addContainerGap()
 						.addComponent(subjectLabel)
-						.addGap(42, 42, 42)
+						.addGap(40, 40, 40)
 						.addComponent(subjectScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
 						.addContainerGap())
 				);

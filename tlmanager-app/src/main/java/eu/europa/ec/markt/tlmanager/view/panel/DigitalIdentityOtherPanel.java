@@ -49,6 +49,12 @@ public class DigitalIdentityOtherPanel extends JPanel implements ContentDialogCl
 	private static final Logger LOG = LoggerFactory.getLogger(DigitalIdentityCertificatePanel.class);
 	private static final ResourceBundle uiKeys = ResourceBundle.getBundle("eu/europa/ec/markt/tlmanager/uiKeysComponents", Configuration.getInstance().getLocale());
 
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JTextArea other;
+	private javax.swing.JLabel otherLabel;
+	private javax.swing.JScrollPane otherScrollPane;
+	// End of variables declaration//GEN-END:variables
+
 	private JFileChooser fileChooser;
 	private DigitalIdentityModel digitalIdentityModel;
 	private CertificateToken certificate;
@@ -124,7 +130,7 @@ public class DigitalIdentityOtherPanel extends JPanel implements ContentDialogCl
 				.addGroup(layout.createSequentialGroup()
 						.addContainerGap()
 						.addComponent(otherLabel)
-						.addGap(42, 42, 42)
+						.addGap(51, 51, 51)
 						.addComponent(otherScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
 						.addContainerGap())
 				);
@@ -147,11 +153,7 @@ public class DigitalIdentityOtherPanel extends JPanel implements ContentDialogCl
 		}
 	}// GEN-LAST:event_closeButtonActionPerformed
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JTextArea other;
-	private javax.swing.JLabel otherLabel;
-	private javax.swing.JScrollPane otherScrollPane;
-	// End of variables declaration//GEN-END:variables
+
 	/*
 	 * (non-Javadoc)
 	 *
