@@ -243,9 +243,9 @@
     </pluginRepositories>
 
 	<scm>
-		<url>https://github.com/esig/dss.git</url>
-		<connection>scm:git:https://github.com/esig/dss.git</connection>
-		<developerConnection>scm:git:https://github.com/esig/dss.git</developerConnection>
+		<url>https://github.com/esig/tlmanager.git</url>
+		<connection>scm:git:https://github.com/esig/tlmanager.git</connection>
+		<developerConnection>scm:git:https://github.com/esig/tlmanager.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
