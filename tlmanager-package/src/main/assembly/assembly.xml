@@ -6,6 +6,7 @@
 
 	<id>package</id>
 
+    <baseDirectory></baseDirectory>
 	<formats>
 		<format>zip</format>
 	</formats>
