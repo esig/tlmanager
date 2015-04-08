@@ -242,4 +242,35 @@
         </pluginRepository>
     </pluginRepositories>
 
+	<scm>
+		<url>https://github.com/esig/dss.git</url>
+		<connection>scm:git:https://github.com/esig/dss.git</connection>
+		<developerConnection>scm:git:https://github.com/esig/dss.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
+	<developers>
+		<developer>
+			<id>naramski</id>
+			<name>David Naramski</name>
+			<roles>
+				<role>developer</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>vandenbroucke</id>
+			<name>Pierrick Vandenbroucke</name>
+			<roles>
+				<role>developer</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>pirard</id>
+			<name>Nicolas Pirard</name>
+			<roles>
+				<role>developer</role>
+			</roles>
+		</developer>
+	</developers>
+	
 </project>
