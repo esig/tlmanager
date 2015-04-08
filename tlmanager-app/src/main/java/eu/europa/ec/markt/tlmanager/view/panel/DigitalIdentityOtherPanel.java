@@ -54,7 +54,7 @@ public class DigitalIdentityOtherPanel extends JPanel implements ContentDialogCl
 	private javax.swing.JLabel otherLabel;
 	private javax.swing.JScrollPane otherScrollPane;
 	// End of variables declaration//GEN-END:variables
-
+	
 	private JFileChooser fileChooser;
 	private DigitalIdentityModel digitalIdentityModel;
 	private CertificateToken certificate;
