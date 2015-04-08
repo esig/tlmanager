@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
 	<name>Organisational pom for Application TLManager</name>
 	<groupId>eu.europa.ec.joinup.sd-dss</groupId>
-	<version>4.1.8-SNAPSHOT</version>
+	<version>4.1.8.RC1</version>
 	<artifactId>tl-manager</artifactId>
 	<packaging>pom</packaging>
 
@@ -157,7 +156,7 @@
 		<url>https://github.com/esig/tlmanager.git</url>
 		<connection>scm:git:https://github.com/esig/tlmanager.git</connection>
 		<developerConnection>scm:git:https://github.com/esig/tlmanager.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>4.1.8.RC1</tag>
 	</scm>
 
 	<developers>
