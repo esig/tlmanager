@@ -1,31 +1,22 @@
-/*
- * DSS - Digital Signature Services
+/**
+ * TL Manager
+ * Copyright (C) 2015 European Commission, provided under the CEF programme
  *
- * Copyright (C) 2013 European Commission, Directorate-General Internal Market and Services (DG MARKT), B-1049 Bruxelles/Brussel
+ * This file is part of the "TL Manager" project.
  *
- * Developed by: 2013 ARHS Developments S.A. (rue Nicolas Bové 2B, L-1253 Luxembourg) http://www.arhs-developments.com
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
  *
- * This file is part of the "DSS - Digital Signature Services" project.
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * "DSS - Digital Signature Services" is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Lesser General Public License as published by the Free Software Foundation, either version 2.1 of the
- * License, or (at your option) any later version.
- *
- * DSS is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
- * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License along with
- * "DSS - Digital Signature Services".  If not, see <http://www.gnu.org/licenses/>.
- */
-
-/*
- * Project: Digital Signature Services (DSS)
- * Contractor: ARHS-Developments
- *
- * $HeadURL: https://forge.aris-lux.lan/svn/dgmarktdss/trunk/apps/tlmanager/tlmanager-app/src/main/java/eu/europa/ec/markt/tlmanager/view/multivalue/content/DigitalIDMultivalueModel.java $
- * $Revision: 2519 $
- * $Date: 2013-09-10 17:26:58 +0200 (Tue, 10 Sep 2013) $
- * $Author: bouillni $
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 package eu.europa.ec.markt.tlmanager.view.multivalue.content;
 
@@ -43,12 +34,12 @@ import eu.europa.ec.markt.tsl.jaxb.tsl.DigitalIdentityType;
 
 /**
  * TODO
- * <p/>
- * <p/>
- * DISCLAIMER: Project owner DG-MARKT.
  *
- * @author <a href="mailto:dgmarkt.Project-DSS@arhs-developments.com">ARHS Developments</a>
- * @version $Revision: 2519 $ - $Date: 2013-09-10 17:26:58 +0200 (Tue, 10 Sep 2013) $
+ *
+ *
+ *
+ *
+ *
  */
 public class ServiceDigitalIdentityMultivalueAdapter implements MultipleModel<DigitalIdentityModel> {
 

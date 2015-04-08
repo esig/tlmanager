@@ -1,23 +1,23 @@
-/*
- * DSS - Digital Signature Services
+/**
+ * TL Manager
+ * Copyright (C) 2015 European Commission, provided under the CEF programme
  *
- * Copyright (C) 2013 European Commission, Directorate-General Internal Market and Services (DG MARKT), B-1049 Bruxelles/Brussel
+ * This file is part of the "TL Manager" project.
  *
- * Developed by: 2013 ARHS Developments S.A. (rue Nicolas Bové 2B, L-1253 Luxembourg) http://www.arhs-developments.com
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
  *
- * This file is part of the "DSS - Digital Signature Services" project.
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * "DSS - Digital Signature Services" is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Lesser General Public License as published by the Free Software Foundation, either version 2.1 of the
- * License, or (at your option) any later version.
- *
- * DSS is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
- * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License along with
- * "DSS - Digital Signature Services".  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-
 package eu.europa.ec.markt.tlmanager.core.validation;
 
 import java.io.Serializable;
@@ -99,7 +99,7 @@ import eu.europa.ec.markt.tsl.jaxb.xmldsig.KeyValueType;
  * If there are errors in phase 1, the 2nd phase won't be started. Although the individual validation
  * methods here may rely on the work of {@code ObjectFiller}, null checks are done again extensively.
  *
- * @version $Revision$ - $Date$
+ *
  */
 @SuppressWarnings("unused")
 public class Validation {
@@ -338,7 +338,7 @@ public class Validation {
 
 	/**
 	 * 5.5.3 Service digital identity
-	 * <p/>
+	 *
 	 * The TLSO may list more than one certificate to represent the
 	 * public key, but only when all those certificates relate to the same public key and have identical
 	 * subject names
@@ -1066,7 +1066,7 @@ public class Validation {
 	/**
 	 * If Type = "generic", there must be at least 2 URIs in TypeCommunityRule. If Type = "schemes", there must be only
 	 * 1 URI in TypeCommunityRule. Note: This check is done with values from the TSL page
-	 * <p/>
+	 *
 	 * Note: this check is done reading the starting mode of the application (not with tsl.schemeInformation.tslType)
 	 */
 	private void checkRuleTypeCommunityRule() {
@@ -1287,7 +1287,7 @@ public class Validation {
 
 	/**
 	 * 5.5.3 Service digital identity
-	 * <p/>
+	 *
 	 * The same public key (and hence the same certificate representing this public key) shall not appear
 	 * more than once in the trusted list for the same type of service. The same public key may appear
 	 * more than once in the TL only when associated to trust services having different 'Service type
@@ -1374,7 +1374,7 @@ public class Validation {
 
 	/**
 	 * 5.3.8 Status Determination Approach
-	 * <p/>
+	 *
 	 * In the context of EU Member State trusted lists, the URI shall be set to
 	 * "http://uri.etsi.org/TrstSvc/TrustedList/TSLType/StatusDetn/EUappropriate" as defined in
 	 * clause D.5.
@@ -1472,10 +1472,10 @@ public class Validation {
 
 	/**
 	 * If present, the service information extensions list must contain at least one extension.
-	 * <p/>
+	 *
 	 * Note: As soon there is something different than having a tob and ecri extensionType, the extensionList for a
 	 * service is not considered to be empty anymore.
-	 * <p/>
+	 *
 	 * Note2: this checks on all available extensions at the same time (Service and History).
 	 */
 	private void checkRuleServiceInformationExtensions() {
@@ -1568,7 +1568,7 @@ public class Validation {
 
 	/**
 	 * History
-	 * <p/>
+	 *
 	 * The service digital identifier must refer to the SDI described in the Service entity.
 	 */
 	private void checkRuleServiceDigitalIdentifier() {

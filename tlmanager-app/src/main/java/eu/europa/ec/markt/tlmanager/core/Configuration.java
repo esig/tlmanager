@@ -1,23 +1,23 @@
-/*
- * DSS - Digital Signature Services
+/**
+ * TL Manager
+ * Copyright (C) 2015 European Commission, provided under the CEF programme
  *
- * Copyright (C) 2013 European Commission, Directorate-General Internal Market and Services (DG MARKT), B-1049 Bruxelles/Brussel
+ * This file is part of the "TL Manager" project.
  *
- * Developed by: 2013 ARHS Developments S.A. (rue Nicolas Bové 2B, L-1253 Luxembourg) http://www.arhs-developments.com
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
  *
- * This file is part of the "DSS - Digital Signature Services" project.
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * "DSS - Digital Signature Services" is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Lesser General Public License as published by the Free Software Foundation, either version 2.1 of the
- * License, or (at your option) any later version.
- *
- * DSS is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
- * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License along with
- * "DSS - Digital Signature Services".  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-
 package eu.europa.ec.markt.tlmanager.core;
 
 import java.awt.Color;
@@ -40,7 +40,7 @@ import eu.europa.ec.markt.tlmanager.util.Util;
 /**
  * Main Configuration class for TLManager.
  *
- * @version $Revision$ - $Date$
+ *
  */
 
 public class Configuration {
@@ -432,11 +432,11 @@ public class Configuration {
 
 	/**
 	 * Abstract class for a general TSL.
-	 * <p/>
-	 * <p>DISCLAIMER: Project owner DG-MARKT.
 	 *
-	 * @author <a href="mailto:dgmarkt.Project-DSS@arhs-developments.com">ARHS Developments</a>
-	 * @version $Revision$ - $Date$
+	 *
+	 *
+	 *
+	 *
 	 */
 	public static abstract class TSL {
 		protected String[] parseValueString(String value) {
@@ -479,12 +479,12 @@ public class Configuration {
 
 	/**
 	 * Helper class for maintaining property values for a TL.
-	 * <p/>
-	 * <p/>
-	 * DISCLAIMER: Project owner DG-MARKT.
 	 *
-	 * @author <a href="mailto:dgmarkt.Project-DSS@arhs-consulting.com">ARHS Consulting</a>
-	 * @version $Revision$ - $Date$
+	 *
+	 *
+	 *
+	 *
+	 *
 	 */
 	public class TL extends TSL {
 		private static final String TSL_TL_TAG = "tlmanager.tsl.tl.tag";
@@ -638,12 +638,12 @@ public class Configuration {
 
 	/**
 	 * Helper class for maintaining property values for a LOTL.
-	 * <p/>
-	 * <p/>
-	 * DISCLAIMER: Project owner DG-MARKT.
 	 *
-	 * @author <a href="mailto:dgmarkt.Project-DSS@arhs-consulting.com">ARHS Consulting</a>
-	 * @version $Revision$ - $Date$
+	 *
+	 *
+	 *
+	 *
+	 *
 	 */
 	public class LOTL extends TSL {
 		private static final String TSL_LOTL_TAG = "tlmanager.tsl.lotl.tag";
@@ -728,12 +728,12 @@ public class Configuration {
 
 	/**
 	 * Helper class for parsing Country Codes from a Property and maintaining them for further access.
-	 * <p/>
-	 * <p/>
-	 * DISCLAIMER: Project owner DG-MARKT.
 	 *
-	 * @author <a href="mailto:dgmarkt.Project-DSS@arhs-consulting.com">ARHS Consulting</a>
-	 * @version $Revision$ - $Date$
+	 *
+	 *
+	 *
+	 *
+	 *
 	 */
 	public static class CountryCodes {
 		private List<CountryCode> codes = new ArrayList<CountryCode>();
@@ -812,12 +812,12 @@ public class Configuration {
 
 	/**
 	 * Helper class that represents a Country Code
-	 * <p/>
-	 * <p/>
-	 * DISCLAIMER: Project owner DG-MARKT.
 	 *
-	 * @author <a href="mailto:dgmarkt.Project-DSS@arhs-consulting.com">ARHS Consulting</a>
-	 * @version $Revision$ - $Date$
+	 *
+	 *
+	 *
+	 *
+	 *
 	 */
 	private static class CountryCode {
 		private String shortName;
@@ -851,12 +851,12 @@ public class Configuration {
 
 	/**
 	 * Helper class for parsing Language Codes from a Property and maintaining them for further access.
-	 * <p/>
-	 * <p/>
-	 * DISCLAIMER: Project owner DG-MARKT.
 	 *
-	 * @author <a href="mailto:dgmarkt.Project-DSS@arhs-consulting.com">ARHS Consulting</a>
-	 * @version $Revision$ - $Date$
+	 *
+	 *
+	 *
+	 *
+	 *
 	 */
 	public static class LanguageCodes {
 		private List<String> codes = new ArrayList<String>();
