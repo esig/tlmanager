@@ -1,95 +1,95 @@
-/*
- * DSS - Digital Signature Services
+/**
+ * TL Manager
+ * Copyright (C) 2015 European Commission, provided under the CEF programme
  *
- * Copyright (C) 2013 European Commission, Directorate-General Internal Market and Services (DG MARKT), B-1049 Bruxelles/Brussel
+ * This file is part of the "TL Manager" project.
  *
- * Developed by: 2013 ARHS Developments S.A. (rue Nicolas Bové 2B, L-1253 Luxembourg) http://www.arhs-developments.com
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
  *
- * This file is part of the "DSS - Digital Signature Services" project.
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * "DSS - Digital Signature Services" is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Lesser General Public License as published by the Free Software Foundation, either version 2.1 of the
- * License, or (at your option) any later version.
- *
- * DSS is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
- * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License along with
- * "DSS - Digital Signature Services".  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-
 package eu.europa.ec.markt.tlmanager.view.multivalue.content;
 
-import java.awt.*;
+import java.awt.Component;
 
+import eu.europa.ec.markt.dss.validation102853.CertificateToken;
 import eu.europa.ec.markt.tlmanager.view.certificate.DigitalIdentityModel;
 import eu.europa.ec.markt.tlmanager.view.panel.DigitalIdentityPanel;
-import java.security.cert.X509Certificate;
 
 /**
  * TODO
- * <p/>
- * <p/>
- * DISCLAIMER: Project owner DG-MARKT.
  *
- * @author <a href="mailto:dgmarkt.Project-DSS@arhs-developments.com">ARHS Developments</a>
- * @version $Revision: 1016 $ - $Date: 2011-06-17 15:30:45 +0200 (Fri, 17 Jun 2011) $
+ *
+ *
+ *
+ *
+ *
  */
 public class DigitalIdentityContent extends MultiContent<DigitalIdentityModel> {
 
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(DigitalIdentityContent.class);
+	private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(DigitalIdentityContent.class);
 
-    private final DigitalIdentityPanel panel;
+	private final DigitalIdentityPanel panel;
 
-    public DigitalIdentityContent() {
-        panel = new DigitalIdentityPanel();
-        panel.setName(panel.getClass().getSimpleName());
-    }
+	public DigitalIdentityContent() {
+		panel = new DigitalIdentityPanel();
+		panel.setName(panel.getClass().getSimpleName());
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Component getComponent() {
-        return panel;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Component getComponent() {
+		return panel;
+	}
 
-    @Override
-    protected DigitalIdentityModel retrieveComponentValue(boolean clearOnExit) {
-        DigitalIdentityModel model = panel.getDigitalIdentityModel();
+	@Override
+	protected DigitalIdentityModel retrieveComponentValue(boolean clearOnExit) {
+		DigitalIdentityModel model = panel.getDigitalIdentityModel();
 
-        if (clearOnExit) {
-            panel.clearOnExit();
-        }
-        return model;
-    }
+		if (clearOnExit) {
+			panel.clearOnExit();
+		}
+		return model;
+	}
 
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void updateValue() {
-        LOG.info("Update value for key " + currentKey);
-        DigitalIdentityModel value = getValue(currentKey);
-        LOG.info("... value is " + value);
-        panel.updateCurrentValues(value);
+	/**
+	 * {@inheritDoc}
+	 */
+	 @Override
+	 protected void updateValue() {
+		 LOG.info("Update value for key " + currentKey);
+		 DigitalIdentityModel value = getValue(currentKey);
+		 LOG.info("... value is " + value);
+		 panel.updateCurrentValues(value);
 
-        DigitalIdentityModel model = panel.getDigitalIdentityModel();
-        panel.setHistorical(true);
+		 DigitalIdentityModel model = panel.getDigitalIdentityModel();
+		 panel.setHistorical(true);
 
-        //Check if there is a Certificate defined in Digital ID
-        boolean certificateFound = false;
-        java.util.List<String> listOfCollectionKeys = getKeys();
-        X509Certificate certificate = null;
-        int i = 0;
-        while(!certificateFound && listOfCollectionKeys.size()>i) {
-            DigitalIdentityModel dIvalue = getValue(listOfCollectionKeys.get(i));
-            certificateFound = dIvalue.getCertificate() != null;
-            certificate = dIvalue.getCertificate();
-            i++;
-        }
-        panel.setCertificate(certificate);
-    }
+		 //Check if there is a Certificate defined in Digital ID
+		 boolean certificateFound = false;
+		 java.util.List<String> listOfCollectionKeys = getKeys();
+		 CertificateToken certificate = null;
+		 int i = 0;
+		 while(!certificateFound && (listOfCollectionKeys.size()>i)) {
+			 DigitalIdentityModel dIvalue = getValue(listOfCollectionKeys.get(i));
+			 certificateFound = dIvalue.getCertificate() != null;
+			 certificate = dIvalue.getCertificate();
+			 i++;
+		 }
+		 panel.setCertificate(certificate);
+	 }
 
 }

@@ -1,37 +1,39 @@
-/*
- * DSS - Digital Signature Services
+/**
+ * TL Manager
+ * Copyright (C) 2015 European Commission, provided under the CEF programme
  *
- * Copyright (C) 2013 European Commission, Directorate-General Internal Market and Services (DG MARKT), B-1049 Bruxelles/Brussel
+ * This file is part of the "TL Manager" project.
  *
- * Developed by: 2013 ARHS Developments S.A. (rue Nicolas Bové 2B, L-1253 Luxembourg) http://www.arhs-developments.com
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
  *
- * This file is part of the "DSS - Digital Signature Services" project.
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * "DSS - Digital Signature Services" is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Lesser General Public License as published by the Free Software Foundation, either version 2.1 of the
- * License, or (at your option) any later version.
- *
- * DSS is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
- * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License along with
- * "DSS - Digital Signature Services".  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-
 package eu.europa.ec.markt.tlmanager.view.panel;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileInputStream;
-import java.security.cert.X509Certificate;
 import java.util.ResourceBundle;
 
-import javax.swing.*;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import eu.europa.ec.markt.dss.DSSUtils;
+import eu.europa.ec.markt.dss.validation102853.CertificateToken;
 import eu.europa.ec.markt.tlmanager.core.Configuration;
 import eu.europa.ec.markt.tlmanager.util.Util;
 import eu.europa.ec.markt.tlmanager.view.certificate.DigitalIdentityModel;
@@ -40,188 +42,188 @@ import eu.europa.ec.markt.tlmanager.view.common.ContentDialogCloser;
 /**
  * A panel which allows uploading a certificate and displays its data.
  *
- * @version $Revision: 2497 $ - $Date: 2013-09-05 17:30:51 +0200 (Thu, 05 Sep 2013) $
+ *
  */
 
 public class DigitalIdentitySKIPanel extends JPanel implements ContentDialogCloser {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DigitalIdentityCertificatePanel.class);
-    private static final ResourceBundle uiKeys = ResourceBundle.getBundle("eu/europa/ec/markt/tlmanager/uiKeysComponents", Configuration.getInstance().getLocale());
+	private static final Logger LOG = LoggerFactory.getLogger(DigitalIdentityCertificatePanel.class);
+	private static final ResourceBundle uiKeys = ResourceBundle.getBundle("eu/europa/ec/markt/tlmanager/uiKeysComponents", Configuration.getInstance().getLocale());
 
-    private JFileChooser fileChooser;
-    private DigitalIdentityModel digitalIdentityModel;
-    private X509Certificate certificate;
+	private JFileChooser fileChooser;
+	private DigitalIdentityModel digitalIdentityModel;
+	private CertificateToken certificate;
 
-    /**
-     * The default constructor for DigitalIdentityPanel.
-     */
-    public DigitalIdentitySKIPanel() {
-        this.fileChooser = new JFileChooser();
+	/**
+	 * The default constructor for DigitalIdentityPanel.
+	 */
+	public DigitalIdentitySKIPanel() {
+		this.fileChooser = new JFileChooser();
 
-        initComponents();
+		initComponents();
 
-    }
+	}
 
-    /**
-     * Another constructor for DigitalIdentityPanel.
-     */
-    public DigitalIdentitySKIPanel(JFileChooser fileChooser) {
-        this.fileChooser = fileChooser;
+	/**
+	 * Another constructor for DigitalIdentityPanel.
+	 */
+	public DigitalIdentitySKIPanel(JFileChooser fileChooser) {
+		this.fileChooser = fileChooser;
 
-        initComponents();
+		initComponents();
 
-    }
+	}
 
-    private void loadCertificate(File file) {
-        try {
+	private void loadCertificate(File file) {
+		try {
 
-            final FileInputStream inputStream = new FileInputStream(file);
-            final X509Certificate certificate = DSSUtils.loadCertificate(inputStream);
-            if (certificate != null) {
-                byte[] skiValue = DSSUtils.getSki(certificate);
-                digitalIdentityModel.setSKI(skiValue);
-            } else {
-                digitalIdentityModel.setSKI(null);
-            }
-            refresh();
-        } catch (Exception ex) {
-            String message = uiKeys.getString("DigitalIdentityPanel.error.message");
-            JOptionPane.showMessageDialog(this, message, uiKeys.getString("DigitalIdentityPanel.error.title"), JOptionPane.INFORMATION_MESSAGE);
-            LOG.warn(message + " " + ex.getMessage(), ex);
-        }
-    }
+			final FileInputStream inputStream = new FileInputStream(file);
+			final CertificateToken certificate = DSSUtils.loadCertificate(inputStream);
+			if (certificate != null) {
+				byte[] skiValue = DSSUtils.getSki(certificate.getCertificate());
+				digitalIdentityModel.setSKI(skiValue);
+			} else {
+				digitalIdentityModel.setSKI(null);
+			}
+			refresh();
+		} catch (Exception ex) {
+			String message = uiKeys.getString("DigitalIdentityPanel.error.message");
+			JOptionPane.showMessageDialog(this, message, uiKeys.getString("DigitalIdentityPanel.error.title"), JOptionPane.INFORMATION_MESSAGE);
+			LOG.warn(message + " " + ex.getMessage(), ex);
+		}
+	}
 
-    /**
-     *
-     */
-    public void refresh() {
-        // clean data
-        ski.setText("");
-        byte[] skiBytes = null;
-        if (digitalIdentityModel != null) {
-            skiBytes = digitalIdentityModel.getSKI();
-        }
+	/**
+	 *
+	 */
+	public void refresh() {
+		// clean data
+		ski.setText("");
+		byte[] skiBytes = null;
+		if (digitalIdentityModel != null) {
+			skiBytes = digitalIdentityModel.getSKI();
+		}
 
-        if (skiBytes == null && certificate != null) {
-            skiBytes = DSSUtils.getSki(certificate);
-        }
+		if ((skiBytes == null) && (certificate != null)) {
+			skiBytes = DSSUtils.getSki(certificate.getCertificate());
+		}
 
-        if (skiBytes != null) {
-            ski.setText(DSSUtils.base64Encode(skiBytes));
-        }
-    }
+		if (skiBytes != null) {
+			ski.setText(DSSUtils.base64Encode(skiBytes));
+		}
+	}
 
-    /**
-     * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The
-     * content of this method is always regenerated by the Form Editor.
-     */
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+	/**
+	 * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The
+	 * content of this method is always regenerated by the Form Editor.
+	 */
+	@SuppressWarnings("unchecked")
+	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+	private void initComponents() {
 
-        subjectScrollPane = new javax.swing.JScrollPane();
-        ski = new javax.swing.JTextArea();
-        skiLabel = new javax.swing.JLabel();
+		subjectScrollPane = new javax.swing.JScrollPane();
+		ski = new javax.swing.JTextArea();
+		skiLabel = new javax.swing.JLabel();
 
-        setName("DigitalIdentityPanel"); // NOI18N
+		setName("DigitalIdentityPanel"); // NOI18N
 
-        ski.setColumns(5);
-        ski.setLineWrap(true);
-        ski.setRows(3);
-        ski.setWrapStyleWord(true);
-        subjectScrollPane.setViewportView(ski);
+		ski.setColumns(5);
+		ski.setLineWrap(true);
+		ski.setRows(3);
+		ski.setWrapStyleWord(true);
+		subjectScrollPane.setViewportView(ski);
 
-        skiLabel.setText(uiKeys.getString("DigitalIdentityPanel.ski")); // NOI18N
+		skiLabel.setText(uiKeys.getString("DigitalIdentityPanel.ski")); // NOI18N
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(skiLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(subjectScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
-                                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(skiLabel)
-                                        .addComponent(subjectScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
-                                .addContainerGap())
-        );
-    }// </editor-fold>//GEN-END:initComponents
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+		this.setLayout(layout);
+		layout.setHorizontalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(skiLabel)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(subjectScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+						.addContainerGap())
+				);
+		layout.setVerticalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addComponent(skiLabel)
+								.addComponent(subjectScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
+								.addContainerGap())
+				);
+	}// </editor-fold>//GEN-END:initComponents
 
-    private void selectCertificateActionPerformed(ActionEvent evt) {// GEN-FIRST:event_selectCertificateActionPerformed
-        int returnValue = fileChooser.showOpenDialog(getRootPane());
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            loadCertificate(selectedFile);
-        }
-    }// GEN-LAST:event_selectCertificateActionPerformed
+	private void selectCertificateActionPerformed(ActionEvent evt) {// GEN-FIRST:event_selectCertificateActionPerformed
+		int returnValue = fileChooser.showOpenDialog(getRootPane());
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
+			File selectedFile = fileChooser.getSelectedFile();
+			loadCertificate(selectedFile);
+		}
+	}// GEN-LAST:event_selectCertificateActionPerformed
 
-    private void closeButtonActionPerformed(ActionEvent evt) {// GEN-FIRST:event_closeButtonActionPerformed
-        boolean closed = Util.closeDialog(evt);
-        if (closed) {
-            dialogWasClosed();
-        }
-    }// GEN-LAST:event_closeButtonActionPerformed
+	private void closeButtonActionPerformed(ActionEvent evt) {// GEN-FIRST:event_closeButtonActionPerformed
+		boolean closed = Util.closeDialog(evt);
+		if (closed) {
+			dialogWasClosed();
+		}
+	}// GEN-LAST:event_closeButtonActionPerformed
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea ski;
-    private javax.swing.JLabel skiLabel;
-    private javax.swing.JScrollPane subjectScrollPane;
-    // End of variables declaration//GEN-END:variables
-    /*
-     * (non-Javadoc)
-     * 
-     * @see eu.europa.ec.markt.tlmanager.view.common.ContentDialogCloser#dialogWasClosed()
-     */
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JTextArea ski;
+	private javax.swing.JLabel skiLabel;
+	private javax.swing.JScrollPane subjectScrollPane;
+	// End of variables declaration//GEN-END:variables
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see eu.europa.ec.markt.tlmanager.view.common.ContentDialogCloser#dialogWasClosed()
+	 */
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void dialogWasClosed() {
-        digitalIdentityModel.updateDigitalIdentity();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void dialogWasClosed() {
+		digitalIdentityModel.updateDigitalIdentity();
+	}
 
-    /**
-     * @return the digitalIdentityModel
-     */
-    public DigitalIdentityModel getDigitalIdentityModel() {
-        return digitalIdentityModel;
-    }
+	/**
+	 * @return the digitalIdentityModel
+	 */
+	public DigitalIdentityModel getDigitalIdentityModel() {
+		return digitalIdentityModel;
+	}
 
-    /**
-     * Sets the certificate model. Used by Binding !
-     *
-     * @param digitalIdentityModel the new certificate model
-     */
-    public void setDigitalIdentityModel(DigitalIdentityModel digitalIdentityModel) {
-        this.digitalIdentityModel = digitalIdentityModel;
-        refresh();
-    }
+	/**
+	 * Sets the certificate model. Used by Binding !
+	 *
+	 * @param digitalIdentityModel the new certificate model
+	 */
+	public void setDigitalIdentityModel(DigitalIdentityModel digitalIdentityModel) {
+		this.digitalIdentityModel = digitalIdentityModel;
+		refresh();
+	}
 
-    /**
-     * Provides the current content information.
-     *
-     * @return the content information
-     */
-    public byte[] retrieveContentInformation() {
-        byte[] info = null;
-        final String skiText = ski.getText();
-        if (DSSUtils.isNotBlank(skiText)) {
-            info = DSSUtils.base64Decode(skiText);
-        }
-        return info;
-    }
+	/**
+	 * Provides the current content information.
+	 *
+	 * @return the content information
+	 */
+	public byte[] retrieveContentInformation() {
+		byte[] info = null;
+		final String skiText = ski.getText();
+		if (DSSUtils.isNotBlank(skiText)) {
+			info = DSSUtils.base64Decode(skiText);
+		}
+		return info;
+	}
 
-    void setCertificate(X509Certificate certificate) {
-        this.certificate = certificate;
-    }
+	void setCertificate(CertificateToken certificate) {
+		this.certificate = certificate;
+	}
 
 }

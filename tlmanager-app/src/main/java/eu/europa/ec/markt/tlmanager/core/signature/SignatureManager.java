@@ -1,23 +1,23 @@
-/*
- * DSS - Digital Signature Services
+/**
+ * TL Manager
+ * Copyright (C) 2015 European Commission, provided under the CEF programme
  *
- * Copyright (C) 2013 European Commission, Directorate-General Internal Market and Services (DG MARKT), B-1049 Bruxelles/Brussel
+ * This file is part of the "TL Manager" project.
  *
- * Developed by: 2013 ARHS Developments S.A. (rue Nicolas Bové 2B, L-1253 Luxembourg) http://www.arhs-developments.com
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
  *
- * This file is part of the "DSS - Digital Signature Services" project.
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
  *
- * "DSS - Digital Signature Services" is free software: you can redistribute it and/or modify it under the terms of
- * the GNU Lesser General Public License as published by the Free Software Foundation, either version 2.1 of the
- * License, or (at your option) any later version.
- *
- * DSS is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
- * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License along with
- * "DSS - Digital Signature Services".  If not, see <http://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
-
 package eu.europa.ec.markt.tlmanager.core.signature;
 
 import java.io.ByteArrayOutputStream;
@@ -26,7 +26,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.security.cert.Certificate;
-import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +63,7 @@ import eu.europa.ec.markt.dss.signature.token.Pkcs11SignatureToken;
 import eu.europa.ec.markt.dss.signature.token.Pkcs12SignatureToken;
 import eu.europa.ec.markt.dss.signature.token.SignatureTokenConnection;
 import eu.europa.ec.markt.dss.signature.xades.XAdESService;
+import eu.europa.ec.markt.dss.validation102853.CertificateToken;
 import eu.europa.ec.markt.dss.validation102853.CertificateVerifier;
 import eu.europa.ec.markt.dss.validation102853.CommonCertificateVerifier;
 import eu.europa.ec.markt.tlmanager.core.Configuration;
@@ -73,7 +73,7 @@ import eu.europa.ec.markt.tlmanager.util.Util;
 /**
  * SignatureManager deals with everything related to the creation of a signature for a given tsl.
  *
- * @version $Revision$ - $Date$
+ *
  */
 
 public class SignatureManager {
@@ -170,7 +170,7 @@ public class SignatureManager {
 		if (provider == null) {
 			return;
 		}
-		if (signatureTokenConnection == null || !provider.equals(lastProvider)) { // provider was changed in ui
+		if ((signatureTokenConnection == null) || !provider.equals(lastProvider)) { // provider was changed in ui
 			initializeTokenCon();
 		}
 		try {
@@ -225,7 +225,7 @@ public class SignatureManager {
 	public File getPkcs11Library() {
 		if (pkcs11Library == null) {
 			String path = userPreferencesDAO.getPKCS11LibraryPath();
-			if (path != null && !path.isEmpty()) {
+			if ((path != null) && !path.isEmpty()) {
 				pkcs11Library = new File(path);
 			}
 		}
@@ -252,7 +252,7 @@ public class SignatureManager {
 	public File getPkcs12File() {
 		if (pkcs12File == null) {
 			String path = userPreferencesDAO.getPKCS12FilePath();
-			if (path != null && !path.isEmpty()) {
+			if ((path != null) && !path.isEmpty()) {
 				pkcs12File = new File(path);
 			}
 		}
@@ -300,7 +300,6 @@ public class SignatureManager {
 
 		final SignatureParameters parameters = new SignatureParameters();
 		parameters.setDigestAlgorithm(digestAlgorithm);
-
 		parameters.setPrivateKeyEntry(pk);
 		/**
 		 * 5.7 Signature
@@ -317,8 +316,8 @@ public class SignatureManager {
 		 * <b>The ds:keyInfo shall not contain any associated certificate chain.</b>
 		 */
 		parameters.clearCertificateChain();
-		final X509Certificate signingCertificate = parameters.getSigningCertificate();
-		parameters.setSigningCertificate(signingCertificate);
+		final CertificateToken certificateToken = parameters.getSigningCertificate();
+		parameters.setSigningCertificate(certificateToken);
 		parameters.setSignatureLevel(signatureLevel);
 		parameters.setSignaturePackaging(signaturePackaging);
 
@@ -361,11 +360,11 @@ public class SignatureManager {
 	 *
 	 * @return a list of certificates
 	 */
-	public List<Certificate> getCertificates() {
-		if (keys == null || !provider.equals(lastProvider)) {
+	public List<CertificateToken> getCertificates() {
+		if ((keys == null) || !provider.equals(lastProvider)) {
 			retrieveCertificates();
 		}
-		List<Certificate> certificates = new ArrayList<Certificate>();
+		List<CertificateToken> certificates = new ArrayList<CertificateToken>();
 		for (DSSPrivateKeyEntry key : keys) {
 			certificates.add(key.getCertificate());
 		}
@@ -374,11 +373,11 @@ public class SignatureManager {
 	}
 
 	private DSSPrivateKeyEntry determineCurrentPK() {
-		if (keys == null || selectedCertificate == null) {
+		if ((keys == null) || (selectedCertificate == null)) {
 			return null;
 		}
 		for (DSSPrivateKeyEntry key : keys) {
-			if (selectedCertificate.equals(key.getCertificate())) {
+			if (selectedCertificate.equals(key.getCertificate().getCertificate())) {
 				return key;
 			}
 		}
@@ -458,7 +457,7 @@ public class SignatureManager {
 	 * @return true, if any source is set
 	 */
 	public boolean isAnySource() {
-		return pkcs11Library != null || pkcs12File != null;
+		return (pkcs11Library != null) || (pkcs12File != null);
 	}
 
 	/**

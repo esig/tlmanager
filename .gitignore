@@ -9,4 +9,8 @@ test-output
 .idea
 .DS_Store
 atlassian-ide-plugin.xml
-
+dependency-reduced-pom.xml
+tlmanager-app/custom.properties
+tlmanager-app/src/main/java/eu/europa/ec/markt/tlmanager/view/multivalue/content/tlmanager-package-4.1.8-SNAPSHOT.zip
+*.releaseBackup
+tlmanager-package/release.properties
